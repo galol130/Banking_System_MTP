@@ -13,17 +13,18 @@ public class CustomUserDetails implements UserDetails {
 
     private User user;
 
-    public CustomUserDetails(User user){
+    public CustomUserDetails(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities =new HashSet<>();
+        Collection<GrantedAuthority> authorities = new HashSet<>();
 
-        for(Role role : user.getRoles()){
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
+        for (Role role : user.getRoles()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRoleName()));
         }
+        System.out.println("Authorities: \n\n\t" + authorities);
 
         return authorities;
     }

@@ -1,6 +1,6 @@
 package com.ironhack.MidTerm.service.accounts.impl;
 
-import com.ironhack.MidTerm.controller.accounts.DTO.UserAccountBalanceDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.AccountBasicsGetRequestDTO;
 import com.ironhack.MidTerm.model.accounts.Account;
 import com.ironhack.MidTerm.model.users.AccountHolder;
 import com.ironhack.MidTerm.repository.AccountRepository;
@@ -25,8 +25,8 @@ public class AccountService implements IAccountService {
         return convertAccountToDTO(account);
     }
 
-    public List<UserAccountBalanceDTO> getAccountsWithBalance(String username) {
-        List<UserAccountBalanceDTO> result = new ArrayList<>();
+    public List<AccountBasicsGetRequestDTO> getAccountsWithBalance(String username) {
+        List<AccountBasicsGetRequestDTO> result = new ArrayList<>();
         AccountHolder accountHolder = accountHolderService.getAccountHolderByUsername(username);
         List<Account> accountList = accountRepository.findAllByPrimaryOwnerId(accountHolder.getId());
         accountList.addAll(accountRepository.findAllBySecondaryOwnerId(accountHolder.getId()));
@@ -38,7 +38,7 @@ public class AccountService implements IAccountService {
         return result;
     }
 
-    public UserAccountBalanceDTO convertAccountToDTO(Account account) {
-        return new UserAccountBalanceDTO(account.getStartDate(), account.getBalance(), account.getStatus());
+    public AccountBasicsGetRequestDTO convertAccountToDTO(Account account) {
+        return new AccountBasicsGetRequestDTO(account.getStartDate(), account.getBalance(), account.getStatus());
     }
 }

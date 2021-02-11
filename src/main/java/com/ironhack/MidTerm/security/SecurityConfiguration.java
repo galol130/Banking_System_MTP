@@ -1,6 +1,6 @@
 package com.ironhack.MidTerm.security;
 
-import com.ironhack.MidTerm.service.users.interfaces.ICustomUserDetailsService;
+import com.ironhack.MidTerm.service.users.impl.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private ICustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -37,13 +37,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
         http.csrf().disable().authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/accounts").hasRole("ADMIN")
+                .mvcMatchers(HttpMethod.GET,"/accounts").hasRole("ADMIN")
+//                .antMatchers("/accounts").authenticated()
+//                .antMatchers("/accounts").hasAuthority("ROLE_ADMIN")
 //                .mvcMatchers(HttpMethod.POST, "/author").hasRole("ADMIN")
-//                .mvcMatchers(HttpMethod.PUT, "/author/{id}").hasAnyRole("ADMIN", "CONTRIBUTOR")
-//                .mvcMatchers(HttpMethod.DELETE, "/author/{id}").hasRole("ADMIN")
-//                .mvcMatchers(HttpMethod.POST, "/post").hasAnyRole("ADMIN", "CONTRIBUTOR")
-//                .mvcMatchers(HttpMethod.PUT, "/post/{id}").hasAnyRole("ADMIN", "CONTRIBUTOR")
-//                .mvcMatchers(HttpMethod.DELETE, "/post/{id}").hasRole("ADMIN")
                 .anyRequest().permitAll();
     }
 

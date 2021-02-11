@@ -8,6 +8,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface AccountHolderRepository extends JpaRepository<AccountHolder, UUID> {
-    public Optional<AccountHolder> findByUsername(String username);
+public interface AccountHolderRepository extends JpaRepository<AccountHolder, Long> {
+    Optional<AccountHolder> findByUsername(String username);
 }

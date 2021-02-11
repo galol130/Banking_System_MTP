@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.controller.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.SavingsAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.SavingsAccountGetRequestDTO;
 import com.ironhack.MidTerm.controller.accounts.interfaces.ISavingsAccountController;
 import com.ironhack.MidTerm.model.accounts.SavingsAccount;
 import com.ironhack.MidTerm.model.users.AccountHolder;
@@ -36,7 +37,7 @@ public class SavingsAccountController implements ISavingsAccountController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/savings-account")
     @ResponseStatus(HttpStatus.CREATED)
-    public SavingsAccount createCheckingAccount(@RequestBody @Valid SavingsAccountCreationRequestDTO creationRequestDTO) {
+    public SavingsAccountGetRequestDTO createCheckingAccount(@RequestBody @Valid SavingsAccountCreationRequestDTO creationRequestDTO) {
         Optional<AccountHolder> primaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
         if (primaryAccountHolder.isPresent()) {
             return savingsAccountService.createSavingsAccount(creationRequestDTO, primaryAccountHolder.get());

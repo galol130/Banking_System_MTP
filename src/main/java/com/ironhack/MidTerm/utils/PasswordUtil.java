@@ -10,6 +10,12 @@ public class PasswordUtil {
         return passwordEncoder.encode(plainPassword);
     }
 
+//  Returns true if inputPassword equals savedPassword (hash saved in DB)
+    public static boolean verifyPassword(String inputPassword, String savedPassword){
+        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.matches(inputPassword, savedPassword);
+    }
+
     public static void main(String[] args) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         System.out.println(passwordEncoder.encode("123456"));

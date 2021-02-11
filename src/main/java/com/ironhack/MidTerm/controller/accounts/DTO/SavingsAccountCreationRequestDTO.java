@@ -5,9 +5,8 @@ import java.util.UUID;
 
 public class SavingsAccountCreationRequestDTO {
     @NotNull(message = "Accounts must have at least one owner!")
-    private UUID accountHolderId;
-    @Null
-    private UUID secondaryAccountHolderId;
+    private Long accountHolderId;
+    private Long secondaryAccountHolderId;
     @Size(min = 3, max = 3, message = "Use the 3-characters identifier for Currency")
     private String balanceCurrency;
     @Min(value = 100, message = "Savings accounts cannot be opened with an initial balance below the Minimum Balance for this type")
@@ -21,10 +20,11 @@ public class SavingsAccountCreationRequestDTO {
     private Double interestRate;
 
 
+
     public SavingsAccountCreationRequestDTO() {
     }
 
-    public SavingsAccountCreationRequestDTO(@NotNull(message = "Accounts must have at least one owner!") UUID accountHolderId, @Null UUID secondaryAccountHolderId, @Size(min = 3, max = 3, message = "Use the 3-characters identifier for Currency") String balanceCurrency, @Min(value = 100, message = "Savings accounts cannot be opened with an initial balance below the Minimum Balance for this type") @Max(value = 1000000, message = "Due to internal policies, initial balance cannot be over 1.000.000. Contact Admin") Double balanceAmount, @Min(value = 100, message = "Minimum balance is not allowed below 100. To use the Default value, type '0' ") Double minimumBalance, @Size(min = 6, max = 20, message = "Your secret key must have between 6-20 characters") String secretKey, @DecimalMax(value = "0.5", message = "Max interest rate allowed is 0.5. To use the Default value, type '0'") Double interestRate) {
+    public SavingsAccountCreationRequestDTO(@NotNull(message = "Accounts must have at least one owner!") Long accountHolderId, @Null Long secondaryAccountHolderId, @Size(min = 3, max = 3, message = "Use the 3-characters identifier for Currency") String balanceCurrency, @Min(value = 100, message = "Savings accounts cannot be opened with an initial balance below the Minimum Balance for this type") @Max(value = 1000000, message = "Due to internal policies, initial balance cannot be over 1.000.000. Contact Admin") Double balanceAmount, @Min(value = 100, message = "Minimum balance is not allowed below 100. To use the Default value, type '0' ") Double minimumBalance, @Size(min = 6, max = 20, message = "Your secret key must have between 6-20 characters") String secretKey, @DecimalMax(value = "0.5", message = "Max interest rate allowed is 0.5. To use the Default value, type '0'") Double interestRate) {
         this.accountHolderId = accountHolderId;
         this.secondaryAccountHolderId = secondaryAccountHolderId;
         this.balanceCurrency = balanceCurrency;
@@ -35,19 +35,19 @@ public class SavingsAccountCreationRequestDTO {
     }
 
     //  Getters and setters
-    public UUID getAccountHolderId() {
+    public Long getAccountHolderId() {
         return accountHolderId;
     }
 
-    public void setAccountHolderId(UUID accountHolderId) {
+    public void setAccountHolderId(Long accountHolderId) {
         this.accountHolderId = accountHolderId;
     }
 
-    public UUID getSecondaryAccountHolderId() {
+    public Long getSecondaryAccountHolderId() {
         return secondaryAccountHolderId;
     }
 
-    public void setSecondaryAccountHolderId(UUID secondaryAccountHolderId) {
+    public void setSecondaryAccountHolderId(Long secondaryAccountHolderId) {
         this.secondaryAccountHolderId = secondaryAccountHolderId;
     }
 

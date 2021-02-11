@@ -7,24 +7,19 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
-    private static final Role DEFAULT_userRole = new Role(RoleName.STANDARD_USER);
-    private static final Role DEFAULT_thirdPartyRole = new Role(RoleName.THIRDPARTY);
-    private static final Set<Role> DEFAULT_roleSet = new HashSet<Role>();
-
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "originUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -38,15 +33,14 @@ public abstract class User {
     public User() {
     }
 
-    //  Full constructor with DEFAULT role
+    //  Full constructor with NO role
     public User(String username, String password, String firstName, String lastName) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        DEFAULT_roleSet.add(DEFAULT_userRole);
-        setRoles(DEFAULT_roleSet);
     }
+
 
     //  Full constructor with roles as parameter
     public User(String username, String password, String firstName, String lastName, Set<Role> roles) {
@@ -61,16 +55,14 @@ public abstract class User {
     public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        DEFAULT_roleSet.add(DEFAULT_thirdPartyRole);
-        setRoles(DEFAULT_roleSet);
     }
 
     //  Getters and setters
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.service.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.CreditCardAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.CreditCardAccountGetRequestDTO;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Money;
 import com.ironhack.MidTerm.model.accounts.CreditCardAccount;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Optional;
 
@@ -26,27 +28,41 @@ public class CreditCardAccountService implements ICreditCardAccountService {
     private IAccountHolderService accountHolderService;
 
 
-
     @Override
-    public CreditCardAccount createCreditCardAccount(CreditCardAccountCreationRequestDTO creationRequestDTO, AccountHolder accountHolder) {
+    public CreditCardAccountGetRequestDTO createCreditCardAccount(CreditCardAccountCreationRequestDTO creationRequestDTO, AccountHolder accountHolder) {
         CreditCardAccount creditCardAccount;
         BigDecimal amount = BigDecimal.valueOf(creationRequestDTO.getBalanceAmount());
         Currency currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
         Money balance = new Money(amount, currency);
         SecretKey secretKey = EncryptorUtil.createSecretKey(creationRequestDTO.getSecretKey());
 
-        if(creationRequestDTO.getSecondaryAccountHolderId() != null) {
+        if (creationRequestDTO.getSecondaryAccountHolderId() != null) {
             Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getSecondaryAccountHolderId());
             creditCardAccount = secondaryAccountHolder.map(secondaryHolder -> new CreditCardAccount(balance, secretKey, accountHolder, secondaryHolder, Status.ACTIVE)).orElseGet(() -> new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE));
-        }else
+        } else
             creditCardAccount = new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE);
 
-        if(creationRequestDTO.getInterestRate() > 0)
+        if (creationRequestDTO.getInterestRate() > 0)
             creditCardAccount.setInterestRate(creationRequestDTO.getInterestRate());
-        if(creationRequestDTO.getCreditLimit() > 0)
+        if (creationRequestDTO.getCreditLimit() > 0)
             creditCardAccount.setCreditLimit(creationRequestDTO.getCreditLimit());
 
-        return creditCardAccountRepository.save(creditCardAccount);
+        creditCardAccountRepository.save(creditCardAccount);
+
+        return convertCreditCardAccountToDTO(creditCardAccount);
+    }
+
+    public CreditCardAccountGetRequestDTO convertCreditCardAccountToDTO(CreditCardAccount creditCardAccount) {
+        return new CreditCardAccountGetRequestDTO(
+                creditCardAccount.getId(),
+                creditCardAccount.getStartDate(),
+                creditCardAccount.getBalance(),
+                creditCardAccount.getPrimaryOwner(),
+                creditCardAccount.getSecondaryOwner(),
+                creditCardAccount.getStatus(),
+                creditCardAccount.getCreditLimit(),
+                creditCardAccount.getInterestRate(),
+                creditCardAccount.getPenaltyFee());
     }
 }
 

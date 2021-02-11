@@ -6,7 +6,7 @@ import com.ironhack.MidTerm.model.Money;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-public class UserAccountBalanceDTO {
+public class AccountBasicsGetRequestDTO {
     private Long id;
     private LocalDate startDate;
     @Embedded
@@ -16,7 +16,7 @@ public class UserAccountBalanceDTO {
     private Status status;
 
 
-    public UserAccountBalanceDTO(LocalDate startDate, Money balance, Status status) {
+    public AccountBasicsGetRequestDTO(LocalDate startDate, Money balance, Status status) {
         this.startDate = startDate;
         this.balance = balance;
         this.status = status;

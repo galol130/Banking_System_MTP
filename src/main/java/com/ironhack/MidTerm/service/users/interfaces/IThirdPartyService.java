@@ -1,11 +1,8 @@
-package com.ironhack.MidTerm.controller.users.interfaces;
+package com.ironhack.MidTerm.service.users.interfaces;
 
 import com.ironhack.MidTerm.controller.users.DTO.ThirdPartyCreationRequestDTO;
 import com.ironhack.MidTerm.controller.users.DTO.ThirdPartyGetRequestDTO;
-import com.ironhack.MidTerm.model.users.ThirdParty;
 
-public interface IThirdPartyController {
-    ThirdParty getThirdPartyById(Long id);
-
+public interface IThirdPartyService {
     ThirdPartyGetRequestDTO createThirdParty(ThirdPartyCreationRequestDTO creationRequestDTO);
 }

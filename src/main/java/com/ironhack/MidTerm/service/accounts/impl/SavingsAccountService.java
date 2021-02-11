@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.service.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.SavingsAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.SavingsAccountGetRequestDTO;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Money;
 import com.ironhack.MidTerm.model.accounts.SavingsAccount;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Optional;
 
@@ -27,7 +29,7 @@ public class SavingsAccountService implements ISavingsAccountService {
 
 
     @Override
-    public SavingsAccount createSavingsAccount(SavingsAccountCreationRequestDTO creationRequestDTO, AccountHolder accountHolder) {
+    public SavingsAccountGetRequestDTO createSavingsAccount(SavingsAccountCreationRequestDTO creationRequestDTO, AccountHolder accountHolder) {
         SavingsAccount savingsAccount;
         BigDecimal amount = BigDecimal.valueOf(creationRequestDTO.getBalanceAmount());
         Currency currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
@@ -46,6 +48,22 @@ public class SavingsAccountService implements ISavingsAccountService {
         if (creationRequestDTO.getMinimumBalance() > 0)
             savingsAccount.setMinimumBalance(new Money(BigDecimal.valueOf(creationRequestDTO.getMinimumBalance())));
 
-        return savingsAccountRepository.save(savingsAccount);
+        savingsAccountRepository.save(savingsAccount);
+
+        return convertSavingsAccountToDTO(savingsAccount);
     }
+
+    public SavingsAccountGetRequestDTO convertSavingsAccountToDTO(SavingsAccount savingsAccount) {
+        return new SavingsAccountGetRequestDTO(
+                savingsAccount.getId(),
+                savingsAccount.getStartDate(),
+                savingsAccount.getBalance(),
+                savingsAccount.getPrimaryOwner(),
+                savingsAccount.getSecondaryOwner(),
+                savingsAccount.getStatus(),
+                savingsAccount.getMinimumBalance(),
+                savingsAccount.getPenaltyFee(),
+                savingsAccount.getInterestRate());
+    }
+
 }

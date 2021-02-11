@@ -39,18 +39,19 @@ public class AccountHolder extends User {
     })
     private Address secondaryAddress;
 
-    @OneToMany(mappedBy = "primaryOwner")
+    @OneToMany(mappedBy = "primaryOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account> primaryAccountsList;
 
-    @OneToMany(mappedBy = "secondaryOwner")
+    @OneToMany(mappedBy = "secondaryOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Account> secondaryAccountsList;
-
 
 
     public AccountHolder() {
     }
 
-/** Constructor without set of roles, will take the DEFAULT role (STANDARD_USER)  **/
+    /**
+     * Constructor without set of roles, will take the DEFAULT role (STANDARD_USER)
+     **/
     public AccountHolder(String username, String password, String firstName, String lastName, String personalId, LocalDate dateOfBirth, Address primaryAddress, Address secondaryAddress) {
         super(username, password, firstName, lastName);
         this.personalId = personalId;
@@ -59,7 +60,9 @@ public class AccountHolder extends User {
         this.secondaryAddress = secondaryAddress;
     }
 
-/** Full constructor    **/
+    /**
+     * Full constructor
+     **/
     public AccountHolder(String username, String password, String firstName, String lastName, Set<Role> roleSet, String personalId, LocalDate dateOfBirth, Address primaryAddress, Address secondaryAddress) {
         super(username, password, firstName, lastName, roleSet);
         this.personalId = personalId;
@@ -68,7 +71,7 @@ public class AccountHolder extends User {
         this.secondaryAddress = secondaryAddress;
     }
 
-//  Getters and setters
+    //  Getters and setters
     public String getPersonalId() {
         return personalId;
     }

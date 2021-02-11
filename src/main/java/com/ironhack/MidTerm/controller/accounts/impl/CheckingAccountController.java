@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.controller.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountGetRequestDTO;
 import com.ironhack.MidTerm.controller.accounts.interfaces.ICheckingAccountController;
 import com.ironhack.MidTerm.model.accounts.CheckingAccount;
 import com.ironhack.MidTerm.model.users.AccountHolder;
@@ -40,11 +41,10 @@ public class CheckingAccountController implements ICheckingAccountController {
         return checkingAccountRepository.findAll();
     }
 
-
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/checking-account")
     @ResponseStatus(HttpStatus.CREATED)
-    public Object createCheckingAccount(@RequestBody @Valid CheckingAccountCreationRequestDTO creationRequestDTO) {
+    public CheckingAccountGetRequestDTO createCheckingAccount(@RequestBody @Valid CheckingAccountCreationRequestDTO creationRequestDTO) {
         Optional<AccountHolder> primaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
         if(primaryAccountHolder.isPresent()){
             if(AgeCalculatorUtil.isOlderThan(primaryAccountHolder.get().getDateOfBirth(), 24)){
@@ -56,9 +56,5 @@ public class CheckingAccountController implements ICheckingAccountController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account holder not found");
         }
     }
-
-
-
-
 
 }

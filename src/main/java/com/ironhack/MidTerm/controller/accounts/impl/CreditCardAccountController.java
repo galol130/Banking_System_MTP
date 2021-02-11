@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.controller.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.CreditCardAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.CreditCardAccountGetRequestDTO;
 import com.ironhack.MidTerm.controller.accounts.interfaces.ICreditCardAccountController;
 import com.ironhack.MidTerm.model.accounts.CreditCardAccount;
 import com.ironhack.MidTerm.model.users.AccountHolder;
@@ -30,6 +31,7 @@ public class CreditCardAccountController implements ICreditCardAccountController
     @Autowired
     private IAccountHolderService accountHolderService;
 
+
     @GetMapping(value = "/credit-card-accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<CreditCardAccount> getCreditCardAccounts(){return creditCardAccountRepository.findAll();}
@@ -37,7 +39,7 @@ public class CreditCardAccountController implements ICreditCardAccountController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/credit-card-account")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreditCardAccount createCreditCardAccount(CreditCardAccountCreationRequestDTO creationRequestDTO) {
+    public CreditCardAccountGetRequestDTO createCreditCardAccount(CreditCardAccountCreationRequestDTO creationRequestDTO) {
         Optional<AccountHolder> primaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
         if (primaryAccountHolder.isPresent()) {
             return creditCardAccountService.createCreditCardAccount(creationRequestDTO, primaryAccountHolder.get());

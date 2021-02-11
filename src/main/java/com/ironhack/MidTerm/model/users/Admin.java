@@ -11,7 +11,7 @@ public class Admin extends User {
     public Admin() {
     }
 
-//  Constructor without set of roles, will take the DEFAULT role (STANDARD_USER)
+//  Constructor without roles
     public Admin(String username, String password, String firstName, String lastName, String personalId) {
         super(username, password, firstName, lastName);
         this.personalId = personalId;

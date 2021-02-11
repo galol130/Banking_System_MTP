@@ -1,41 +1,39 @@
 package com.ironhack.MidTerm.service.users.impl;
 
-import com.ironhack.MidTerm.model.users.AccountHolder;
-import com.ironhack.MidTerm.model.users.Admin;
-import com.ironhack.MidTerm.repository.AccountHolderRepository;
-import com.ironhack.MidTerm.repository.AdminRepository;
+import com.ironhack.MidTerm.model.users.Role;
+import com.ironhack.MidTerm.model.users.User;
+import com.ironhack.MidTerm.repository.UserRepository;
 import com.ironhack.MidTerm.security.CustomUserDetails;
 import com.ironhack.MidTerm.service.users.interfaces.ICustomUserDetailsService;
+import com.ironhack.MidTerm.utils.styles.ConsoleColors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Optional;
 
+
 @Service
 public class CustomUserDetailsService implements ICustomUserDetailsService {
-    @Autowired
-    private AccountHolderRepository accountHolderRepository;
 
     @Autowired
-    private AdminRepository adminRepository;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        CustomUserDetails customUserDetails;
-        Optional<AccountHolder> accountHolder = accountHolderRepository.findByUsername(username);
-        if (!accountHolder.isPresent()) {
-            Optional<Admin> admin = adminRepository.findByUsername(username);
-            if (!admin.isPresent()) {
-                throw new UsernameNotFoundException("User does not exist");
-            } else {
-                customUserDetails = new CustomUserDetails(admin.get());
-            }
-        } else {
-            customUserDetails = new CustomUserDetails(accountHolder.get());
-        }
+        Optional<User> user = userRepository.findByUsername(username);
+        if(!user.isPresent()){
+            throw new UsernameNotFoundException("Wrong username");
+        }else{
+            System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT+ "\n\t" + user.get().getUsername());
 
-        return customUserDetails;
+            for (Role role:user.get().getRoles() ) {
+                System.out.println(role.getRoleName());
+            }
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT);
+            return new CustomUserDetails(user.get());
+        }
     }
 }

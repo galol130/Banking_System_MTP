@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.service.accounts.impl;
 
 import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountGetRequestDTO;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Money;
 import com.ironhack.MidTerm.model.accounts.StudentCheckingAccount;
@@ -28,20 +29,36 @@ public class StudentCheckingAccountService implements IStudentCheckingAccountSer
 
 
     @Override
-    public StudentCheckingAccount createAccount(CheckingAccountCreationRequestDTO creationRequestDTO, AccountHolder primaryAccountHolder) {
+    public CheckingAccountGetRequestDTO createAccount(CheckingAccountCreationRequestDTO creationRequestDTO, AccountHolder primaryAccountHolder) {
+        StudentCheckingAccount studentCheckingAccount;
         BigDecimal amount = BigDecimal.valueOf(creationRequestDTO.getBalanceAmount());
         Currency currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
         Money balance = new Money(amount, currency);
         SecretKey secretKey = EncryptorUtil.createSecretKey(creationRequestDTO.getSecretKey());
 
         if (creationRequestDTO.getSecondaryAccountHolderId() != null) {
-            Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
-            if (secondaryAccountHolder.isPresent()) {
-                return studentCheckingAccountRepository
+            Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getSecondaryAccountHolderId());
+            if (secondaryAccountHolder.isPresent() && !secondaryAccountHolder.get().getId().equals(creationRequestDTO.getAccountHolderId())) {
+                studentCheckingAccount = studentCheckingAccountRepository
                         .save(new StudentCheckingAccount(balance, secretKey, primaryAccountHolder, secondaryAccountHolder.get(), Status.ACTIVE));
+                return convertStudentCheckingAccountToDTO(studentCheckingAccount);
             }
         }
-        return studentCheckingAccountRepository
+        studentCheckingAccount = studentCheckingAccountRepository
                 .save(new StudentCheckingAccount(balance, secretKey, primaryAccountHolder, Status.ACTIVE));
+        return convertStudentCheckingAccountToDTO(studentCheckingAccount);
+    }
+
+    public CheckingAccountGetRequestDTO convertStudentCheckingAccountToDTO(StudentCheckingAccount studentCheckingAccount) {
+        return new CheckingAccountGetRequestDTO(
+                studentCheckingAccount.getClass().getSimpleName(),
+                studentCheckingAccount.getId(),
+                studentCheckingAccount.getStartDate(),
+                studentCheckingAccount.getPrimaryOwner(),
+                studentCheckingAccount.getSecondaryOwner(),
+                studentCheckingAccount.getBalance(),
+                studentCheckingAccount.getPenaltyFee(),
+                studentCheckingAccount.getStatus()
+        );
     }
 }
