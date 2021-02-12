@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
         http.csrf().disable().authorizeRequests()
-                .mvcMatchers(HttpMethod.GET,"/accounts").hasRole("ADMIN")
+//                .mvcMatchers(HttpMethod.GET,"/accounts").hasRole("ADMIN")
 //                .antMatchers("/accounts").authenticated()
 //                .antMatchers("/accounts").hasAuthority("ROLE_ADMIN")
 //                .mvcMatchers(HttpMethod.POST, "/author").hasRole("ADMIN")

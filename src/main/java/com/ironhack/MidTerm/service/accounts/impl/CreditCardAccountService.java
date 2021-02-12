@@ -38,9 +38,18 @@ public class CreditCardAccountService implements ICreditCardAccountService {
 
         if (creationRequestDTO.getSecondaryAccountHolderId() != null) {
             Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getSecondaryAccountHolderId());
-            creditCardAccount = secondaryAccountHolder.map(secondaryHolder -> new CreditCardAccount(balance, secretKey, accountHolder, secondaryHolder, Status.ACTIVE)).orElseGet(() -> new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE));
-        } else
+            if (secondaryAccountHolder.isPresent()) {
+                if (!secondaryAccountHolder.get().equals(accountHolder)) {
+                    creditCardAccount = new CreditCardAccount(balance, secretKey, accountHolder, secondaryAccountHolder.get(), Status.ACTIVE);
+                } else {
+                    creditCardAccount = new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE);
+                }
+            } else {
+                creditCardAccount = new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE);
+            }
+        } else {
             creditCardAccount = new CreditCardAccount(balance, secretKey, accountHolder, Status.ACTIVE);
+        }
 
         if (creationRequestDTO.getInterestRate() > 0)
             creditCardAccount.setInterestRate(creationRequestDTO.getInterestRate());

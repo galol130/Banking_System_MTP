@@ -35,11 +35,11 @@ public class AccountController implements IAccountController {
         return accountRepository.findAll();
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STANDARD_USER')")
+//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STANDARD_USER')")
     @GetMapping(value = "/account/{id}")
     public Object getAccountById(@PathVariable Long id,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         for (GrantedAuthority auth : customUserDetails.getAuthorities()) {
-            System.out.println(auth.getAuthority());
+            System.out.println("FROM CONTROLLER: " + auth.getAuthority());
         }
         Optional<Account> result = accountRepository.findAccountById(id);
 
@@ -54,13 +54,13 @@ public class AccountController implements IAccountController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_STANDARD_USER')")
+//    @PreAuthorize("hasRole('ROLE_STANDARD_USER')")
     @GetMapping(value = "/accounts/balance")
     public List<AccountBasicsGetRequestDTO> getAccountsBalance(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return accountService.getAccountsWithBalance(customUserDetails.getUsername());
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/account/{id}/basic-details")
     public AccountBasicsGetRequestDTO getAccountBasicDetails(@PathVariable Long id) {
         Optional<Account> account = accountRepository.findAccountById(id);
@@ -71,7 +71,7 @@ public class AccountController implements IAccountController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(value = "/account/{id}/balance")
     @ResponseStatus(HttpStatus.OK)
     public AccountBasicsGetRequestDTO updateAccountBalance(@PathVariable Long id, @RequestParam(name = "amount") Double amountInput) {
@@ -91,7 +91,7 @@ public class AccountController implements IAccountController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(value = "/account/{id}/status")
     @ResponseStatus(HttpStatus.OK)
     public AccountBasicsGetRequestDTO updateAccountStatus(@PathVariable Long id, @RequestParam(name = "status") String statusInput) {

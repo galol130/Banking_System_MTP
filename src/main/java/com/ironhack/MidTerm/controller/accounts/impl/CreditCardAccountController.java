@@ -11,12 +11,10 @@ import com.ironhack.MidTerm.service.accounts.interfaces.ICreditCardAccountServic
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +37,7 @@ public class CreditCardAccountController implements ICreditCardAccountController
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/credit-card-account")
     @ResponseStatus(HttpStatus.CREATED)
-    public CreditCardAccountGetRequestDTO createCreditCardAccount(CreditCardAccountCreationRequestDTO creationRequestDTO) {
+    public CreditCardAccountGetRequestDTO createCreditCardAccount(@RequestBody @Valid CreditCardAccountCreationRequestDTO creationRequestDTO) {
         Optional<AccountHolder> primaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
         if (primaryAccountHolder.isPresent()) {
             return creditCardAccountService.createCreditCardAccount(creationRequestDTO, primaryAccountHolder.get());

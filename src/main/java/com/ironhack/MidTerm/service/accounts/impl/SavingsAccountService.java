@@ -12,8 +12,10 @@ import com.ironhack.MidTerm.service.accounts.interfaces.ISavingsAccountService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.crypto.SecretKey;
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
@@ -37,11 +39,17 @@ public class SavingsAccountService implements ISavingsAccountService {
         SecretKey secretKey = EncryptorUtil.createSecretKey(creationRequestDTO.getSecretKey());
 
         if (creationRequestDTO.getSecondaryAccountHolderId() != null) {
-            Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getAccountHolderId());
-            savingsAccount = secondaryAccountHolder.map(secondaryHolder -> new SavingsAccount(balance, secretKey, accountHolder, secondaryHolder, Status.ACTIVE)).orElseGet(() -> new SavingsAccount(balance, secretKey, accountHolder, Status.ACTIVE));
-        } else {
+            Optional<AccountHolder> secondaryAccountHolder = accountHolderService.findAccountHolderById(creationRequestDTO.getSecondaryAccountHolderId());
+            if (secondaryAccountHolder.isPresent())
+                if (!secondaryAccountHolder.get().equals(accountHolder))
+                    savingsAccount = new SavingsAccount(balance, secretKey, accountHolder, secondaryAccountHolder.get(), Status.ACTIVE);
+                else
+                    savingsAccount = new SavingsAccount(balance, secretKey, accountHolder, Status.ACTIVE);
+            else
+                savingsAccount = new SavingsAccount(balance, secretKey, accountHolder, Status.ACTIVE);
+        } else
             savingsAccount = new SavingsAccount(balance, secretKey, accountHolder, Status.ACTIVE);
-        }
+
 
         if (creationRequestDTO.getInterestRate() > 0)
             savingsAccount.setInterestRate(creationRequestDTO.getInterestRate());
