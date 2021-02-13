@@ -36,3 +36,9 @@ AND origin_account_id = 3;
 SELECT SUM(amount) FROM banking_system.transaction 
 WHERE origin_account_id = 3
 GROUP BY DAYOFYEAR(time_stamp);
+
+
+-- Testing Schema
+DROP SCHEMA IF EXISTS banking_system_test;
+CREATE SCHEMA banking_system_test;
+USE banking_system_test;
