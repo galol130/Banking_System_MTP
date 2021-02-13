@@ -6,8 +6,10 @@ import com.ironhack.MidTerm.enums.RoleName;
 import com.ironhack.MidTerm.model.Address;
 import com.ironhack.MidTerm.model.users.AccountHolder;
 import com.ironhack.MidTerm.model.users.Role;
+import com.ironhack.MidTerm.model.users.User;
 import com.ironhack.MidTerm.repository.AccountHolderRepository;
 import com.ironhack.MidTerm.repository.RoleRepository;
+import com.ironhack.MidTerm.repository.UserRepository;
 import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.utils.PasswordUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +29,9 @@ public class AccountHolderService implements IAccountHolderService {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     public Optional<AccountHolder> findAccountHolderById(Long id) {
@@ -47,6 +53,20 @@ public class AccountHolderService implements IAccountHolderService {
 //  The account holder created will have the same address for principal and secondary fields
     public AccountHolderGetRequestDTO createAccountHolder(AccountHolderCreationRequestDTO creationRequestDTO) {
         AccountHolder accountHolder;
+
+        //Check if username is not already taken
+        Optional<User> user = userRepository.findByUsername(creationRequestDTO.getUsername());
+        if (user.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
+        }
+
+        //Check if the Personal ID is not already in the DB
+        Optional<AccountHolder> accountHolderOptional = accountHolderRepository.findByPersonalId(creationRequestDTO.getPersonalId());
+        if(accountHolderOptional.isPresent()){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Already exists an account holder with that personal ID");
+        }
+
+        //Create new Address, used for primary and secondary addresses
         Address address = new Address(
                 creationRequestDTO.getStreet(),
                 creationRequestDTO.getDoorNumber(),
@@ -71,8 +91,9 @@ public class AccountHolderService implements IAccountHolderService {
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Data provided doesn't match 'AccountHolderCreationRequestDTO' ");
         }
-        roleRepository.save(new Role(RoleName.STANDARD_USER, accountHolder));
+        roleRepository.save(new Role("STANDARD_USER", accountHolder));
         return convertAccountHolderToDTO(accountHolder);
+
     }
 
     public AccountHolderGetRequestDTO convertAccountHolderToDTO(AccountHolder accountHolder) {
@@ -90,6 +111,36 @@ public class AccountHolderService implements IAccountHolderService {
                 accountHolder.getPrimaryAddress().getPostalCode(),
                 accountHolder.getPrimaryAddress().getCountry()
         );
+    }
+
+    @Override
+    public List<Address> changePrimaryAddress(Long id, Address address) {
+
+        //First check if the Account Holder exist
+        Optional<AccountHolder> accountHolderOptional = accountHolderRepository.findById(id);
+        if(accountHolderOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID does not match any Account Holder");
+        AccountHolder accountHolder = accountHolderOptional.get();
+
+        accountHolder.setPrimaryAddress(address);
+        accountHolderRepository.save(accountHolder);
+
+        return List.of(accountHolder.getPrimaryAddress(),accountHolder.getSecondaryAddress());
+    }
+
+    @Override
+    public List<Address> changeSecondaryAddress(Long id, Address address) {
+
+        //First check if the Account Holder exist
+        Optional<AccountHolder> accountHolderOptional = accountHolderRepository.findById(id);
+        if(accountHolderOptional.isEmpty())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID does not match any Account Holder");
+        AccountHolder accountHolder = accountHolderOptional.get();
+
+        accountHolder.setSecondaryAddress(address);
+        accountHolderRepository.save(accountHolder);
+
+        return List.of(accountHolder.getPrimaryAddress(),accountHolder.getSecondaryAddress());
     }
 
 }

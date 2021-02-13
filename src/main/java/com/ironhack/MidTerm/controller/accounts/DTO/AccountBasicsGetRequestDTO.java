@@ -8,6 +8,8 @@ import java.time.LocalDate;
 
 public class AccountBasicsGetRequestDTO {
     private Long id;
+    private String type;
+    private String primaryOwnerName;
     private LocalDate startDate;
     @Embedded
     private Money balance;
@@ -16,7 +18,10 @@ public class AccountBasicsGetRequestDTO {
     private Status status;
 
 
-    public AccountBasicsGetRequestDTO(LocalDate startDate, Money balance, Status status) {
+    public AccountBasicsGetRequestDTO(Long id, String type, String primaryOwnerName, LocalDate startDate, Money balance, Status status) {
+        this.id = id;
+        this.type = type;
+        this.primaryOwnerName = primaryOwnerName;
         this.startDate = startDate;
         this.balance = balance;
         this.status = status;
@@ -29,6 +34,22 @@ public class AccountBasicsGetRequestDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getPrimaryOwnerName() {
+        return primaryOwnerName;
+    }
+
+    public void setPrimaryOwnerName(String primaryOwnerName) {
+        this.primaryOwnerName = primaryOwnerName;
     }
 
     public LocalDate getStartDate() {

@@ -5,6 +5,7 @@ import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 public class EncryptorUtil {
 
@@ -24,7 +25,11 @@ public class EncryptorUtil {
 
     public static SecretKey createSecretKey(String textSecretKey){
         byte[] textSecretKeyToBytes = textSecretKey.getBytes(StandardCharsets.UTF_8);
-        SecretKey secretKey = new SecretKeySpec(textSecretKeyToBytes, "AES");
-        return secretKey;
+        return new SecretKeySpec(textSecretKeyToBytes, "AES");
+    }
+
+    //NO USAR
+    public static String decodeSecretKey(SecretKey secretKey){
+        return Base64.getEncoder().encodeToString(secretKey.getEncoded());
     }
 }

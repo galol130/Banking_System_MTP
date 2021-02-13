@@ -6,7 +6,7 @@ import com.ironhack.MidTerm.controller.users.DTO.AccountHolderGetRequestDTO;
 
 public interface IAccountHolderController {
 
-    Long getIdByUsername(String username);
+    Object getIdByUsername(String username);
 
     AccountHolderGetRequestDTO createAccountHolder(AccountHolderCreationRequestDTO creationRequestDTO);
 }

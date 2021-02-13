@@ -1,6 +1,7 @@
 package com.ironhack.MidTerm.controller.users.DTO;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;

@@ -1,47 +1,24 @@
-package com.ironhack.MidTerm.model.transactions;
+package com.ironhack.MidTerm.controller.transactions.DTO;
 
+import com.ironhack.MidTerm.controller.users.DTO.AccountHolderGetRequestDTO;
 import com.ironhack.MidTerm.model.Money;
-import com.ironhack.MidTerm.model.users.AccountHolder;
-import com.ironhack.MidTerm.model.users.ThirdParty;
-import com.ironhack.MidTerm.model.users.User;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
-public class Transaction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class TransferGetRequestDTO {
     private Long id;
     private LocalDateTime timeStamp;
     private String type;
     private String comments;
-
-    @Embedded
     private Money funds;
-
-    @ManyToOne
-    @JoinColumn(name = "origin_user_id")
-    private AccountHolder originAccountHolder;
+    private AccountHolderGetRequestDTO originAccountHolder;
     private Long originAccountId;
     private String originAccountType;
-
-    @ManyToOne
-    @JoinColumn(name = "destination_user_id")
-    private AccountHolder destinationAccountHolder;
+    private AccountHolderGetRequestDTO destinationAccountHolder;
     private Long destinationAccountId;
     private String destinationAccountType;
 
-    @ManyToOne
-    @JoinColumn(name = "third_party_id")
-    private ThirdParty thirdParty;
-
-
-    public Transaction() {
-    }
-
-    //Constructor to be used for bank clients transfers
-    public Transaction(LocalDateTime timeStamp, String type, String comments, Money funds, AccountHolder originAccountHolder, Long originAccountId, String originAccountType, AccountHolder destinationAccountHolder, Long destinationAccountId, String destinationAccountType) {
+    public TransferGetRequestDTO(Long id, LocalDateTime timeStamp, String type, String comments, Money funds, AccountHolderGetRequestDTO originAccountHolder, Long originAccountId, String originAccountType, AccountHolderGetRequestDTO destinationAccountHolder, Long destinationAccountId, String destinationAccountType) {
+        this.id = id;
         this.timeStamp = timeStamp;
         this.type = type;
         this.comments = comments;
@@ -52,30 +29,6 @@ public class Transaction {
         this.destinationAccountHolder = destinationAccountHolder;
         this.destinationAccountId = destinationAccountId;
         this.destinationAccountType = destinationAccountType;
-    }
-
-    //Constructor for Third Parties Deposits
-    public Transaction(LocalDateTime timeStamp, String comments, Money funds, ThirdParty thirdParty,Long destinationAccountId, String destinationAccountType, AccountHolder destinationAccountHolder) {
-        this.timeStamp = timeStamp;
-        this.type = "Deposit";
-        this.comments = comments;
-        this.funds = funds;
-        this.thirdParty = thirdParty;
-        this.destinationAccountHolder = destinationAccountHolder;
-        this.destinationAccountId =  destinationAccountId;
-        this.destinationAccountType = destinationAccountType;
-    }
-
-    //Constructor for Third Parties Collections
-    public Transaction(LocalDateTime timeStamp, String type, String comments, Money funds,Long originAAccountId, String originAccountType, AccountHolder originAAccountHolder, ThirdParty thirdParty) {
-        this.timeStamp = timeStamp;
-        this.type = type;
-        this.comments = comments;
-        this.funds = funds;
-        this.originAccountHolder = originAAccountHolder;
-        this.originAccountId =  originAAccountId;
-        this.originAccountType = originAccountType;
-        this.thirdParty = thirdParty;
     }
 
     //  Getters and setters
@@ -119,11 +72,11 @@ public class Transaction {
         this.funds = funds;
     }
 
-    public AccountHolder getOriginAccountHolder() {
+    public AccountHolderGetRequestDTO getOriginAccountHolder() {
         return originAccountHolder;
     }
 
-    public void setOriginAccountHolder(AccountHolder originAccountHolder) {
+    public void setOriginAccountHolder(AccountHolderGetRequestDTO originAccountHolder) {
         this.originAccountHolder = originAccountHolder;
     }
 
@@ -143,11 +96,11 @@ public class Transaction {
         this.originAccountType = originAccountType;
     }
 
-    public AccountHolder getDestinationAccountHolder() {
+    public AccountHolderGetRequestDTO getDestinationAccountHolder() {
         return destinationAccountHolder;
     }
 
-    public void setDestinationAccountHolder(AccountHolder destinationAccountHolder) {
+    public void setDestinationAccountHolder(AccountHolderGetRequestDTO destinationAccountHolder) {
         this.destinationAccountHolder = destinationAccountHolder;
     }
 
@@ -165,13 +118,5 @@ public class Transaction {
 
     public void setDestinationAccountType(String destinationAccountType) {
         this.destinationAccountType = destinationAccountType;
-    }
-
-    public ThirdParty getThirdParty() {
-        return thirdParty;
-    }
-
-    public void setThirdParty(ThirdParty thirdParty) {
-        this.thirdParty = thirdParty;
     }
 }

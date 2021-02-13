@@ -30,6 +30,7 @@ public class SavingsAccountController implements ISavingsAccountController {
     private IAccountHolderService accountHolderService;
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/savings-accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<SavingsAccount> getSavingsAccounts(){return savingsAccountRepository.findAll();}

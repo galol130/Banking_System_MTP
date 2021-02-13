@@ -30,6 +30,7 @@ public class CreditCardAccountController implements ICreditCardAccountController
     private IAccountHolderService accountHolderService;
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/credit-card-accounts")
     @ResponseStatus(HttpStatus.OK)
     public List<CreditCardAccount> getCreditCardAccounts(){return creditCardAccountRepository.findAll();}

@@ -3,10 +3,19 @@ package com.ironhack.MidTerm.controller.accounts.interfaces;
 import com.ironhack.MidTerm.controller.accounts.DTO.AccountBasicsGetRequestDTO;
 import com.ironhack.MidTerm.model.accounts.Account;
 import com.ironhack.MidTerm.security.CustomUserDetails;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
 public interface IAccountController {
+//para borrar
+    String testingMethodNoUser();
+
+    String testingMethodForAdmin();
+
+    String greetActiveUser(UserDetails userDetails);
+//fin para borrar
+
 
     List<Account> getAccounts();
 

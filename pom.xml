@@ -12,7 +12,7 @@
 	<artifactId>MidTerm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>MidTerm</name>
-	<description>Banking system for Ironhack&apos;s Midterm Project</description>
+	<description>Banking system for Ironhacks Midterm Project</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

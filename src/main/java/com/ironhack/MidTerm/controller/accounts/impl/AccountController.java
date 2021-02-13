@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -28,39 +29,64 @@ public class AccountController implements IAccountController {
     @Autowired
     private IAccountService accountService;
 
+    // para borrar
+    @GetMapping("/hello")
+    public String testingMethodNoUser() {
+        return "Hello MF World!";
+    }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/bye")
+    public String testingMethodForAdmin() {
+        return "Bye admin!";
+    }
+
+    @GetMapping("greet")
+    public String greetActiveUser(@AuthenticationPrincipal UserDetails userDetails) {
+        return "Welcome " + userDetails.getUsername();
+    }
+// fin para borrar
+
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/accounts")
     public List<Account> getAccounts() {
         return accountRepository.findAll();
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STANDARD_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_STANDARD_USER')")
     @GetMapping(value = "/account/{id}")
-    public Object getAccountById(@PathVariable Long id,@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+    public Object getAccountById(@PathVariable Long id, @AuthenticationPrincipal CustomUserDetails customUserDetails) {
         for (GrantedAuthority auth : customUserDetails.getAuthorities()) {
             System.out.println("FROM CONTROLLER: " + auth.getAuthority());
         }
         Optional<Account> result = accountRepository.findAccountById(id);
 
         if (result.isPresent()) {
-            if (customUserDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equalsIgnoreCase("ROLE_ADMIN"))) {
+            if (customUserDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
                 return result.get();
             } else {
-                return accountService.getAccountById(result.get());
+                if (result.get().getPrimaryOwner().getUsername().equals(customUserDetails.getUsername())) {
+                    return accountService.convertAccountToDTO(result.get());
+                } else if(result.get().getSecondaryOwner() != null
+                        && result.get().getSecondaryOwner().getUsername().equals(customUserDetails.getUsername())) {
+                    return accountService.convertAccountToDTO(result.get());
+                }else{
+                    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "You can only see your accounts");
+                }
             }
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "ID not found");
         }
+
     }
 
-//    @PreAuthorize("hasRole('ROLE_STANDARD_USER')")
+    @PreAuthorize("hasRole('ROLE_STANDARD_USER')")
     @GetMapping(value = "/accounts/balance")
     public List<AccountBasicsGetRequestDTO> getAccountsBalance(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return accountService.getAccountsWithBalance(customUserDetails.getUsername());
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/account/{id}/basic-details")
     public AccountBasicsGetRequestDTO getAccountBasicDetails(@PathVariable Long id) {
         Optional<Account> account = accountRepository.findAccountById(id);
@@ -71,7 +97,7 @@ public class AccountController implements IAccountController {
         }
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(value = "/account/{id}/balance")
     @ResponseStatus(HttpStatus.OK)
     public AccountBasicsGetRequestDTO updateAccountBalance(@PathVariable Long id, @RequestParam(name = "amount") Double amountInput) {
@@ -91,25 +117,23 @@ public class AccountController implements IAccountController {
         }
     }
 
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PatchMapping(value = "/account/{id}/status")
     @ResponseStatus(HttpStatus.OK)
-    public AccountBasicsGetRequestDTO updateAccountStatus(@PathVariable Long id, @RequestParam(name = "status") String statusInput) {
+    public AccountBasicsGetRequestDTO updateAccountStatus(@PathVariable Long id, @RequestParam(name = "change-to") String statusInput) {
         try {
             Status status = Status.valueOf(statusInput.trim().toUpperCase());
             Optional<Account> optionalAccount = accountRepository.findAccountById(id);
-            if(optionalAccount.isPresent()){
+            if (optionalAccount.isPresent()) {
                 Account account = optionalAccount.get();
                 account.setStatus(status);
                 account = accountRepository.save(account);
                 return accountService.convertAccountToDTO(account);
-            }else{
+            } else {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account ID not found");
             }
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong status. Only 'Activate' and 'Freeze' are valid");
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Wrong status. Only 'Active' and 'Frozen' are valid");
         }
     }
-
-
 }

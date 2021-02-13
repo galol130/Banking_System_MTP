@@ -12,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ThirdPartyService implements IThirdPartyService {
     @Autowired
@@ -29,6 +32,19 @@ public class ThirdPartyService implements IThirdPartyService {
             return convertThirdPartyToDTO(thirdParty);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Body data does not match 'ThirdPartyCreationRequestDTO' ");
+        }
+    }
+
+    public List<ThirdPartyGetRequestDTO> getAllThirdParties() {
+        List<ThirdParty> thirdPartyList = thirdPartyRepository.findAll();
+        if (thirdPartyList.size() < 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No Third Parties found");
+        } else {
+            List<ThirdPartyGetRequestDTO> thirdPartyListDTO = new ArrayList<>();
+            for (ThirdParty tp : thirdPartyList) {
+                thirdPartyListDTO.add(convertThirdPartyToDTO(tp));
+            }
+            return thirdPartyListDTO;
         }
     }
 

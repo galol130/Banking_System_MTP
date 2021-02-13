@@ -27,7 +27,7 @@ public class AdminService implements IAdminService {
         List<Admin> adminList = adminRepository.findAll();
         if(adminList.size() < 1){
             Admin admin = adminRepository.save(new Admin("admin", PasswordUtil.encryptPassword("123456"), "Admin firstName", "Admin lastName", "Admin PersonalId"));
-            roleRepository.save(new Role(RoleName.ADMIN, admin));
+            roleRepository.save(new Role("ADMIN", admin));
             System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT + "\n\tAdmin created!!");
         }else{
             System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT + "\n\tAdmin already exists in Database");

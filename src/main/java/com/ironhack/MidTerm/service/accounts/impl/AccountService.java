@@ -7,7 +7,9 @@ import com.ironhack.MidTerm.repository.AccountRepository;
 import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.service.accounts.interfaces.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,15 +32,24 @@ public class AccountService implements IAccountService {
         AccountHolder accountHolder = accountHolderService.getAccountHolderByUsername(username);
         List<Account> accountList = accountRepository.findAllByPrimaryOwnerId(accountHolder.getId());
         accountList.addAll(accountRepository.findAllBySecondaryOwnerId(accountHolder.getId()));
-        if (accountList.size() > 0) {
+
+        if (accountList.size() < 1) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Active user has no accounts");
+        }else{
             for (Account acc : accountList) {
                 result.add(convertAccountToDTO(acc));
             }
+            return result;
         }
-        return result;
     }
 
     public AccountBasicsGetRequestDTO convertAccountToDTO(Account account) {
-        return new AccountBasicsGetRequestDTO(account.getStartDate(), account.getBalance(), account.getStatus());
+        return new AccountBasicsGetRequestDTO(
+                account.getId(),
+                account.getClass().getSimpleName(),
+                account.getPrimaryOwner().getUsername(),
+                account.getStartDate(),
+                account.getBalance(),
+                account.getStatus());
     }
 }

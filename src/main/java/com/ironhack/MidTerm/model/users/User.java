@@ -1,16 +1,13 @@
 package com.ironhack.MidTerm.model.users;
 
-import com.ironhack.MidTerm.enums.RoleName;
-import com.ironhack.MidTerm.model.transactions.Transaction;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User {
+@Inheritance
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,15 +16,9 @@ public abstract class User {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private Set<Role> roles;
-
-    @OneToMany(mappedBy = "originUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Transaction> transactionOriginList;
-
-    @OneToMany(mappedBy = "destinationUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Transaction> transactionDestinationList;
-
 
 
     public User() {
@@ -105,4 +96,5 @@ public abstract class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
 }

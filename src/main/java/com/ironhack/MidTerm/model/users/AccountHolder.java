@@ -1,7 +1,9 @@
 package com.ironhack.MidTerm.model.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.MidTerm.model.Address;
 import com.ironhack.MidTerm.model.accounts.Account;
+import com.ironhack.MidTerm.model.transactions.Transaction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -40,10 +42,20 @@ public class AccountHolder extends User {
     private Address secondaryAddress;
 
     @OneToMany(mappedBy = "primaryOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Account> primaryAccountsList;
 
     @OneToMany(mappedBy = "secondaryOwner", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Account> secondaryAccountsList;
+
+    @OneToMany(mappedBy = "originAccountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Transaction> transactionOriginList;
+
+    @OneToMany(mappedBy = "destinationAccountHolder", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Transaction> transactionDestinationList;
 
 
     public AccountHolder() {
@@ -102,5 +114,37 @@ public class AccountHolder extends User {
 
     public void setSecondaryAddress(Address secondaryAddress) {
         this.secondaryAddress = secondaryAddress;
+    }
+
+    public List<Account> getPrimaryAccountsList() {
+        return primaryAccountsList;
+    }
+
+    public void setPrimaryAccountsList(List<Account> primaryAccountsList) {
+        this.primaryAccountsList = primaryAccountsList;
+    }
+
+    public List<Account> getSecondaryAccountsList() {
+        return secondaryAccountsList;
+    }
+
+    public void setSecondaryAccountsList(List<Account> secondaryAccountsList) {
+        this.secondaryAccountsList = secondaryAccountsList;
+    }
+
+    public List<Transaction> getTransactionOriginList() {
+        return transactionOriginList;
+    }
+
+    public void setTransactionOriginList(List<Transaction> transactionOriginList) {
+        this.transactionOriginList = transactionOriginList;
+    }
+
+    public List<Transaction> getTransactionDestinationList() {
+        return transactionDestinationList;
+    }
+
+    public void setTransactionDestinationList(List<Transaction> transactionDestinationList) {
+        this.transactionDestinationList = transactionDestinationList;
     }
 }

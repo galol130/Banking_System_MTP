@@ -1,5 +1,6 @@
 package com.ironhack.MidTerm.model.accounts;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Money;
 import com.ironhack.MidTerm.model.users.AccountHolder;
@@ -21,9 +22,11 @@ public class Account {
 
     @ManyToOne()
     @JoinColumn(name = "primary_account_owner_id")
+    @JsonIgnore
     private AccountHolder primaryOwner;
     @ManyToOne()
     @JoinColumn(name = "secondary_account_owner_id")
+    @JsonIgnore
     private AccountHolder secondaryOwner;
 
     @Enumerated(EnumType.STRING)
