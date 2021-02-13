@@ -29,23 +29,6 @@ public class AccountController implements IAccountController {
     @Autowired
     private IAccountService accountService;
 
-    // para borrar
-    @GetMapping("/hello")
-    public String testingMethodNoUser() {
-        return "Hello MF World!";
-    }
-
-    @GetMapping("/bye")
-    public String testingMethodForAdmin() {
-        return "Bye admin!";
-    }
-
-    @GetMapping("greet")
-    public String greetActiveUser(@AuthenticationPrincipal UserDetails userDetails) {
-        return "Welcome " + userDetails.getUsername();
-    }
-// fin para borrar
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/accounts")

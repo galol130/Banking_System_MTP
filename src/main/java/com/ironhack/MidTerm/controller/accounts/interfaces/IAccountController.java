@@ -8,14 +8,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 public interface IAccountController {
-//para borrar
-    String testingMethodNoUser();
-
-    String testingMethodForAdmin();
-
-    String greetActiveUser(UserDetails userDetails);
-//fin para borrar
-
 
     List<Account> getAccounts();
 
@@ -28,6 +20,5 @@ public interface IAccountController {
     AccountBasicsGetRequestDTO updateAccountBalance(Long id, Double amountInput);
 
     AccountBasicsGetRequestDTO updateAccountStatus(Long id, String statusInput);
-
 
 }

@@ -27,3 +27,12 @@ INSERT INTO role(role_name, user_id) VALUES
 INSERT INTO role(role_name, user_id) VALUES
 ("STANDARD_USER", 2);
 
+
+-- Queries for Fraud detection
+SELECT SUM(amount) FROM banking_system.transaction 
+WHERE time_stamp between DATE_SUB(CURRENT_TIMESTAMP(), INTERVAL 24 HOUR) AND CURRENT_TIMESTAMP() 
+AND origin_account_id = 3;
+
+SELECT SUM(amount) FROM banking_system.transaction 
+WHERE origin_account_id = 3
+GROUP BY DAYOFYEAR(time_stamp);
