@@ -30,6 +30,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TransactionService implements ITransactionService {
@@ -81,10 +82,15 @@ public class TransactionService implements ITransactionService {
         }
 
         //check for fraud
-        if(isFraudCase1(originAccount, timeStamp) || isFraudCase2(originAccount, timeStamp)) {
+        if(isFraudCase1(originAccount, timeStamp)) {
             originAccount.setStatus(Status.FROZEN);
             accountRepository.save(originAccount);
             throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests for the Origin account. Account has been frozen!");
+        }
+        if(isFraudCase2(originAccount, timeStamp)) {
+            originAccount.setStatus(Status.FROZEN);
+            accountRepository.save(originAccount);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The account has reached the daily limit. Contact Admin!");
         }
 
         //Check if the Origin account is ACTIVE
@@ -192,12 +198,16 @@ public class TransactionService implements ITransactionService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Account is not Active");
 
         //check for fraud
-        if(isFraudCase1(account, timeStamp) || isFraudCase2(account, timeStamp)) {
+        if(isFraudCase1(account, timeStamp)) {
             account.setStatus(Status.FROZEN);
             accountRepository.save(account);
             throw new ResponseStatusException(HttpStatus.TOO_MANY_REQUESTS, "Too many requests for the account. Account has been frozen!");
         }
-
+        if(isFraudCase2(account, timeStamp)) {
+            account.setStatus(Status.FROZEN);
+            accountRepository.save(account);
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "The account has reached the daily limit. Contact Admin!");
+        }
 
 
 
@@ -520,8 +530,17 @@ public class TransactionService implements ITransactionService {
     }
 
     private boolean isFraudCase2(Account account, LocalDateTime timeStamp){
-        List<Transaction> transactionList = transactionRepository.findByOriginAccountId(account.getId());
+        //Gets the sum of the account's transactions in the las 24h (This is why we do it only for Origin accounts)
+        BigDecimal last24Sum = BigDecimal.valueOf(transactionRepository.getSumFromTransactionsLast24h(account.getId()));
+        //Gets the daily sum of the account's transactions
+        List<Double> dailySumDoubles = transactionRepository.getSumFromDailyTransactions(account.getId());
+        List<BigDecimal> dailySum = dailySumDoubles.stream().map(BigDecimal::valueOf).collect(Collectors.toList());
 
+        //Comparison of each day sum (increased 150%) to the sum of the last 24h transaction's amount.
+        for (BigDecimal daySum:dailySum) {
+            if(daySum.multiply(BigDecimal.valueOf(1.5)).compareTo(last24Sum) < 0)
+                return true;
+        }
         return false;
     }
 }
