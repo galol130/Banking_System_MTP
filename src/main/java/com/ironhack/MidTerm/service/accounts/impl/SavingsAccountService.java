@@ -10,6 +10,7 @@ import com.ironhack.MidTerm.repository.SavingsAccountRepository;
 import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.service.accounts.interfaces.ISavingsAccountService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
+import com.ironhack.MidTerm.utils.styles.ConsoleColors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +19,7 @@ import javax.crypto.SecretKey;
 import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Currency;
 import java.util.Optional;
 
@@ -62,6 +64,9 @@ public class SavingsAccountService implements ISavingsAccountService {
     }
 
     public SavingsAccountGetRequestDTO convertSavingsAccountToDTO(SavingsAccount savingsAccount) {
+        //Every time a SavingsAccount is called, the return uses this DTO, so we verify the interest payment as well.
+        checkInterestPayment(savingsAccount);
+
         return new SavingsAccountGetRequestDTO(
                 savingsAccount.getId(),
                 savingsAccount.getStartDate(),
@@ -74,4 +79,17 @@ public class SavingsAccountService implements ISavingsAccountService {
                 savingsAccount.getInterestRate());
     }
 
+    private void checkInterestPayment(SavingsAccount savingsAccount){
+        Period elapsedTime = Period.between(savingsAccount.getLastDateOfInterestPayment(), LocalDate.now());
+        //If one year has passed since the last payment, the balance is increased and the payment date reset.
+        if(elapsedTime.getYears()>0){
+            Double interestRate = savingsAccount.getInterestRate();
+            BigDecimal amountToAdd = BigDecimal.valueOf(savingsAccount.getBalance().getAmount().doubleValue() * interestRate);
+            savingsAccount.getBalance().increaseAmount(amountToAdd);
+            savingsAccount.setLastDateOfInterestPayment(LocalDate.now());
+            savingsAccountRepository.save(savingsAccount);
+            System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT + "Annual interest rate payment done!");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT);
+        }
+    }
 }

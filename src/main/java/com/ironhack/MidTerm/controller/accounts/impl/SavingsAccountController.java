@@ -33,7 +33,7 @@ public class SavingsAccountController implements ISavingsAccountController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(value = "/savings-accounts")
     @ResponseStatus(HttpStatus.OK)
-    public List<SavingsAccount> getSavingsAccounts(){return savingsAccountRepository.findAll();}
+    public List<SavingsAccount> getSavingsAccounts(){ return savingsAccountRepository.findAll();}
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping(value = "/savings-account")

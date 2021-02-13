@@ -10,12 +10,14 @@ import com.ironhack.MidTerm.repository.CreditCardAccountRepository;
 import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.service.accounts.interfaces.ICreditCardAccountService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
+import com.ironhack.MidTerm.utils.styles.ConsoleColors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Currency;
 import java.util.Optional;
 
@@ -62,6 +64,9 @@ public class CreditCardAccountService implements ICreditCardAccountService {
     }
 
     public CreditCardAccountGetRequestDTO convertCreditCardAccountToDTO(CreditCardAccount creditCardAccount) {
+        //Every time a CreditCardAccount is called, the return uses this DTO, so we verify the interest charge as well.
+        checkInterestCharge(creditCardAccount);
+
         return new CreditCardAccountGetRequestDTO(
                 creditCardAccount.getId(),
                 creditCardAccount.getStartDate(),
@@ -72,6 +77,22 @@ public class CreditCardAccountService implements ICreditCardAccountService {
                 creditCardAccount.getCreditLimit(),
                 creditCardAccount.getInterestRate(),
                 creditCardAccount.getPenaltyFee());
+    }
+
+    private void checkInterestCharge(CreditCardAccount creditCardAccount){
+        Period elapsedTime = Period.between(creditCardAccount.getLastDateOfInterestCharge(), LocalDate.now());
+        //If one month has passed since the last charge, the balance is increased and the charge date reset.
+
+        if(elapsedTime.getMonths()>0){
+            Double interestRate = creditCardAccount.getInterestRate();
+            BigDecimal amountToAdd = BigDecimal.valueOf(creditCardAccount.getBalance().getAmount().doubleValue() * interestRate);
+            creditCardAccount.getBalance().increaseAmount(amountToAdd);
+            creditCardAccount.setLastDateOfInterestCharge(LocalDate.now());
+            creditCardAccountRepository.save(creditCardAccount);
+            System.out.println(ConsoleColors.BLUE_BOLD_BRIGHT + "Monthly interest rate charge done!");
+            System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT);
+        }
+
     }
 }
 

@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 public class SavingsAccount extends Account {
@@ -24,6 +25,7 @@ public class SavingsAccount extends Account {
     private Money minimumBalance;
     private Double penaltyFee;
     private Double interestRate;
+    private LocalDate lastDateOfInterestPayment;
 
 
     public SavingsAccount() {
@@ -33,6 +35,7 @@ public class SavingsAccount extends Account {
     //  Two owners
     public SavingsAccount(Money balance, SecretKey secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Status status) {
         super(secretKey, balance, primaryOwner, secondaryOwner, status);
+        this.lastDateOfInterestPayment = LocalDate.now();
         this.penaltyFee = DEFAULT_penaltyFee;
         this.minimumBalance = DEFAULT_minimumBalance;
         this.interestRate = DEFAULT_interestRate;
@@ -42,6 +45,7 @@ public class SavingsAccount extends Account {
     //  One owner
     public SavingsAccount(Money balance, SecretKey secretKey, AccountHolder primaryOwner, Status status) {
         super(secretKey, balance, primaryOwner, status);
+        this.lastDateOfInterestPayment = LocalDate.now();
         this.penaltyFee = DEFAULT_penaltyFee;
         this.minimumBalance = DEFAULT_minimumBalance;
         this.interestRate = DEFAULT_interestRate;
@@ -50,6 +54,7 @@ public class SavingsAccount extends Account {
     //  Full constructor
     public SavingsAccount(Money balance, SecretKey secretKey, AccountHolder primaryOwner, AccountHolder secondaryOwner, Status status, Money minimumBalance, Double interestRate) {
         super(secretKey, balance, primaryOwner, secondaryOwner, status);
+        this.lastDateOfInterestPayment = LocalDate.now();
         this.minimumBalance = minimumBalance;
         this.penaltyFee = DEFAULT_penaltyFee;
         this.interestRate = interestRate;
@@ -81,4 +86,11 @@ public class SavingsAccount extends Account {
         this.interestRate = interestRate;
     }
 
+    public LocalDate getLastDateOfInterestPayment() {
+        return lastDateOfInterestPayment;
+    }
+
+    public void setLastDateOfInterestPayment(LocalDate lastDateOfInterestPayment) {
+        this.lastDateOfInterestPayment = lastDateOfInterestPayment;
+    }
 }

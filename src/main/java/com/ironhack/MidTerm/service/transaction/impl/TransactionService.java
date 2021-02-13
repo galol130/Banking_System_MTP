@@ -4,6 +4,8 @@ import com.ironhack.MidTerm.controller.transactions.DTO.*;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Money;
 import com.ironhack.MidTerm.model.accounts.Account;
+import com.ironhack.MidTerm.model.accounts.CheckingAccount;
+import com.ironhack.MidTerm.model.accounts.SavingsAccount;
 import com.ironhack.MidTerm.model.transactions.Transaction;
 import com.ironhack.MidTerm.model.users.AccountHolder;
 import com.ironhack.MidTerm.model.users.ThirdParty;
@@ -17,6 +19,7 @@ import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.service.users.interfaces.IThirdPartyService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
 import com.ironhack.MidTerm.utils.PasswordUtil;
+import com.ironhack.MidTerm.utils.styles.ConsoleColors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.GrantedAuthority;
@@ -160,6 +163,9 @@ public class TransactionService implements ITransactionService {
         accountRepository.saveAll(List.of(originAccount, destinationAccount));
         transactionRepository.save(trx);
 
+        //Chek (and apply) penalty fee if dropping below the minimum balance
+        checkPenaltyFee(originAccount, trx.getOriginAccountType());
+
         return convertTransferToDTO(trx);
     }
 
@@ -230,6 +236,9 @@ public class TransactionService implements ITransactionService {
         //Database persistence
         transactionRepository.save(trx);
         accountRepository.save(account);
+
+        //Chek (and apply) penalty fee if dropping below the minimum balance
+        checkPenaltyFee(account, trx.getOriginAccountType());
 
         return convertCollectionToDTO(trx);
     }
@@ -542,5 +551,27 @@ public class TransactionService implements ITransactionService {
                 return true;
         }
         return false;
+    }
+
+    private void checkPenaltyFee(Account account, String accountType){
+        if(accountType.equalsIgnoreCase("CheckingAccount")){
+            CheckingAccount checkingAccount = (CheckingAccount) account;
+            if(checkingAccount.getBalance().getAmount().compareTo(checkingAccount.getMinimumBalance().getAmount())<0){
+                applyPenaltyFee(checkingAccount, checkingAccount.getPenaltyFee());
+            }
+        }
+        if(accountType.equalsIgnoreCase("SavingsAccount")) {
+            SavingsAccount savingsAccount = (SavingsAccount) account;
+            if(savingsAccount.getBalance().getAmount().compareTo(savingsAccount.getMinimumBalance().getAmount())<0){
+                applyPenaltyFee(savingsAccount, savingsAccount.getPenaltyFee());
+            }
+        }
+    }
+
+    private void applyPenaltyFee(Account account, Double penaltyFee){
+        account.getBalance().decreaseAmount(BigDecimal.valueOf(penaltyFee));
+        accountRepository.save(account);
+        System.out.println(ConsoleColors.RED_BOLD_BRIGHT + "Penalty Fee applied! Check your balance");
+        System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT);
     }
 }
