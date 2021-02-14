@@ -15,11 +15,13 @@ Ironhack's MidTerm project 2021
 ### Documentation
 [Here](https://documenter.getpostman.com/view/10079423/TWDRu195) you can find the API documentation containing all the endpoints, explanations and examples for requests and responses.
 
+It runs on a remote MySQL database, no need to create your own to try it. If you want to create your own Database, modify the *application.properties* file in the 'Resources' folder.
 <br>
 
 ### Database EER (Enhanced Entity-Relationship) Diagram
 The following image shows the models and its relationships.
 ![Banking System EER Diagram](src/main/resources/static/Database/EER_Diagram.png "Banking System EER Diagram")
+
 
 <br>
 
@@ -39,3 +41,4 @@ The following image shows the models and its relationships.
 - MySQL Workbench
 - Postman
 - Remote MySQL
+- dbforfree.net
