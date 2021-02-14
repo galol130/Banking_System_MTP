@@ -6,7 +6,7 @@ Ironhack's MidTerm project 2021
 ---
 
 ### Requirements and Instructions
-[Here](src/main/resources/static/Ironhack instructions.pdf) you can find all the requirements for developing this project.
+[Here](src/main/resources/static/Ironhack_instructions.pdf) you can find all the requirements for developing this project.
 
 
 
@@ -19,7 +19,7 @@ Ironhack's MidTerm project 2021
 
 ### Database EER (Enhanced Entity-Relationship) Diagram
 The following image shows the models and its relationships.
-![Banking System EER Diagram](src/main/resources/static/Database/EER Diagram.png "Banking System EER Diagram")
+![Banking System EER Diagram](src/main/resources/static/Database/EER_Diagram.png "Banking System EER Diagram")
 
 <br>
 
