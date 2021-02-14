@@ -11,7 +11,9 @@ import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.service.accounts.interfaces.IStudentCheckingAccountService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import java.math.BigDecimal;
@@ -32,7 +34,12 @@ public class StudentCheckingAccountService implements IStudentCheckingAccountSer
     public CheckingAccountGetRequestDTO createAccount(CheckingAccountCreationRequestDTO creationRequestDTO, AccountHolder primaryAccountHolder) {
         StudentCheckingAccount studentCheckingAccount;
         BigDecimal amount = BigDecimal.valueOf(creationRequestDTO.getBalanceAmount());
-        Currency currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
+        Currency currency;
+        try {
+            currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
+        }catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Currency acronym does not exist");
+        }
         Money balance = new Money(amount, currency);
         SecretKey secretKey = EncryptorUtil.createSecretKey(creationRequestDTO.getSecretKey());
 

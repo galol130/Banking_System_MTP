@@ -23,10 +23,6 @@ public class AccountService implements IAccountService {
     private IAccountHolderService accountHolderService;
 
 
-    public Object getAccountById(Account account){
-        return convertAccountToDTO(account);
-    }
-
     public List<AccountBasicsGetRequestDTO> getAccountsWithBalance(String username) {
         List<AccountBasicsGetRequestDTO> result = new ArrayList<>();
         AccountHolder accountHolder = accountHolderService.getAccountHolderByUsername(username);

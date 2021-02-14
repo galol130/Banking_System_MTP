@@ -9,7 +9,5 @@ public interface IAccountService {
 
     List<AccountBasicsGetRequestDTO> getAccountsWithBalance (String username);
 
-    Object getAccountById(Account account);
-
     AccountBasicsGetRequestDTO convertAccountToDTO(Account account);
 }

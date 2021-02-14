@@ -12,8 +12,10 @@ import com.ironhack.MidTerm.service.accounts.interfaces.ISavingsAccountService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
 import com.ironhack.MidTerm.utils.styles.ConsoleColors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
 import javax.validation.Valid;
@@ -36,7 +38,12 @@ public class SavingsAccountService implements ISavingsAccountService {
     public SavingsAccountGetRequestDTO createSavingsAccount(SavingsAccountCreationRequestDTO creationRequestDTO, AccountHolder accountHolder) {
         SavingsAccount savingsAccount;
         BigDecimal amount = BigDecimal.valueOf(creationRequestDTO.getBalanceAmount());
-        Currency currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
+        Currency currency;
+        try {
+            currency = Currency.getInstance(creationRequestDTO.getBalanceCurrency());
+        }catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Currency acronym does not exist");
+        }
         Money balance = new Money(amount, currency);
         SecretKey secretKey = EncryptorUtil.createSecretKey(creationRequestDTO.getSecretKey());
 

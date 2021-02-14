@@ -1,16 +1,19 @@
 package com.ironhack.MidTerm.service.accounts.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountCreationRequestDTO;
+import com.ironhack.MidTerm.controller.accounts.DTO.CheckingAccountGetRequestDTO;
 import com.ironhack.MidTerm.enums.Status;
 import com.ironhack.MidTerm.model.Address;
 import com.ironhack.MidTerm.model.Money;
-import com.ironhack.MidTerm.model.accounts.Account;
 import com.ironhack.MidTerm.model.accounts.CheckingAccount;
 import com.ironhack.MidTerm.model.users.AccountHolder;
 import com.ironhack.MidTerm.repository.AccountHolderRepository;
 import com.ironhack.MidTerm.repository.AccountRepository;
 import com.ironhack.MidTerm.repository.CheckingAccountRepository;
+import com.ironhack.MidTerm.service.accounts.interfaces.ICheckingAccountService;
 import com.ironhack.MidTerm.service.users.impl.AccountHolderService;
+import com.ironhack.MidTerm.service.users.interfaces.IAccountHolderService;
 import com.ironhack.MidTerm.utils.EncryptorUtil;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +26,6 @@ import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Currency;
@@ -33,7 +35,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class AccountServiceTest {
+class CheckingAccountServiceTest {
     @Autowired
     private AccountRepository accountRepository;
 
@@ -42,6 +44,9 @@ class AccountServiceTest {
 
     @Autowired
     private CheckingAccountRepository checkingAccountRepository;
+
+    @Autowired
+    private ICheckingAccountService checkingAccountService;
 
     @Autowired
     private AccountHolderService accountHolderService;
@@ -65,6 +70,7 @@ class AccountServiceTest {
         accountHolderRepository.saveAll(List.of(primaryOwner,secondaryOwner, ownsNothing));
         CheckingAccount acc1 = new CheckingAccount(balance, secretKey, primaryOwner, secondaryOwner, Status.ACTIVE);
         checkingAccountRepository.save(acc1);
+
     }
 
     @AfterEach
@@ -75,25 +81,36 @@ class AccountServiceTest {
     }
 
     @Test
-    void getAccountsWithBalance_correctUsername_OK() {
-        AccountHolder accountHolder =  accountHolderService.getAccountHolderByUsername("username_1");
-        assertEquals("First Name", accountHolder.getFirstName());
+    void createAccount_correctDTO_created() {
+        CheckingAccountCreationRequestDTO creationRequestDTO = new CheckingAccountCreationRequestDTO(
+                1L,
+                2L,
+                "USD",
+                500D,
+                "123456"
+        );
+        Optional<AccountHolder> accountHolder = accountHolderRepository.findByUsername("username_1");
+        CheckingAccountGetRequestDTO checkingAccount = checkingAccountService.createAccount(creationRequestDTO, accountHolderRepository.getOne(accountHolder.get().getId()));
+
+        assertEquals(500D,checkingAccount.getBalance().getAmount().doubleValue());
     }
 
     @Test
-    void getAccountsWithBalance_wrongUsername_Exception() {
-        assertThrows(ResponseStatusException.class, ()-> accountHolderService.getAccountHolderByUsername("whatever"));
+    void createAccount_wrongCurrencyDTO_exception() {
+        CheckingAccountCreationRequestDTO creationRequestDTO = new CheckingAccountCreationRequestDTO(
+                1L,
+                2L,
+                "FFF",
+                500D,
+                "123456"
+        );
+        Optional<AccountHolder> accountHolder = accountHolderRepository.findByUsername("username_1");
+        assertThrows(ResponseStatusException.class, ()-> checkingAccountService.createAccount(creationRequestDTO, accountHolderRepository.getOne(accountHolder.get().getId())));
     }
 
     @Test
-    void getAccountsWithBalance_correctUsernameNoAccounts_Exception() {
-        AccountHolder accountHolder =  accountHolderService.getAccountHolderByUsername("username_3");
-        List<Account> accountList = accountRepository.findAllByPrimaryOwnerId(accountHolder.getId());
-        assertEquals(0, accountList.size());
-    }
+    void convertCheckingAccountToDTO() {
+//  Nothing to test...
 
-    @Test
-    void convertAccountToDTO() {
-//  nothing to test...
     }
 }
