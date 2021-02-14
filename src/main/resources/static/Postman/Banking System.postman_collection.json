@@ -1,0 +1,2640 @@
+{
+	"info": {
+		"_postman_id": "7b57714b-7f06-4d4f-bab4-c514e90b231d",
+		"name": "Banking System",
+		"description": "## Banking System API\n*Mid Term project for Ironhack Bootcamp*\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Accounts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null,
+				"description": "Get all the ``Account``. Method only available for Admin role."
+			},
+			"response": [
+				{
+					"name": "Get Accounts",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=DF330AD24D03FF92D098FD011F5EBB01; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 20:28:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 555\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 250\n        },\n        \"penaltyFee\": 40,\n        \"monthlyMaintenanceFee\": 12\n    },\n    {\n        \"id\": 2,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 800\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 250\n        },\n        \"penaltyFee\": 40,\n        \"monthlyMaintenanceFee\": 12\n    },\n    {\n        \"id\": 4,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 666\n        },\n        \"status\": \"ACTIVE\",\n        \"creditLimit\": 2000,\n        \"interestRate\": 0.19,\n        \"penaltyFee\": 40\n    },\n    {\n        \"id\": 5,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 666\n        },\n        \"status\": \"ACTIVE\",\n        \"creditLimit\": 2000,\n        \"interestRate\": 0.19,\n        \"penaltyFee\": 40\n    },\n    {\n        \"id\": 6,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 2000\n        },\n        \"status\": \"ACTIVE\",\n        \"creditLimit\": 2500,\n        \"interestRate\": 0.19,\n        \"penaltyFee\": 40\n    },\n    {\n        \"id\": 7,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 1500\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 120\n        },\n        \"penaltyFee\": 40,\n        \"interestRate\": 0.32\n    },\n    {\n        \"id\": 8,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 500\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 120\n        },\n        \"penaltyFee\": 40,\n        \"interestRate\": 0.32\n    },\n    {\n        \"id\": 9,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 5000\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 120\n        },\n        \"penaltyFee\": 40,\n        \"interestRate\": 0.42\n    },\n    {\n        \"id\": 3,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 1500\n        },\n        \"status\": \"ACTIVE\",\n        \"penaltyFee\": 40\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Create Account Holder",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"mike\",\r\n    \"password\": \"123456\",\r\n    \"firstName\": \"Mike\",\r\n    \"lastName\": \"Wazowski\",\r\n    \"personalId\": \"198798678Q\",\r\n    \"dateOfBirth\": \"2002-01-20\",\r\n    \"street\": \"No name st.\",\r\n    \"doorNumber\": \"2\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"San Diego\",\r\n    \"stateOrProvince\": \"CA\",\r\n    \"postalCode\": \"90210\",\r\n    \"country\": \"USA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/account-holder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account-holder"
+					]
+				},
+				"description": "Create an ``AccountHolder`` than inherits from ``User``. Must be an Admin for this request."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mike\",\r\n    \"password\": \"123456\",\r\n    \"firstName\": \"Mike\",\r\n    \"lastName\": \"Wazowski\",\r\n    \"personalId\": \"198798678Q\",\r\n    \"dateOfBirth\": \"2002-01-20\",\r\n    \"street\": \"No name st.\",\r\n    \"doorNumber\": \"2\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"San Diego\",\r\n    \"stateOrProvince\": \"CA\",\r\n    \"postalCode\": \"90210\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/account-holder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account-holder"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 19:49:01 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"mike\",\n    \"firstName\": \"Mike\",\n    \"lastName\": \"Wazowski\",\n    \"dateOfBirth\": \"2002-01-20\",\n    \"street\": \"No name st.\",\n    \"doorNumber\": \"2\",\n    \"aptNumber\": \"3\",\n    \"extraInfo\": \"\",\n    \"city\": \"San Diego\",\n    \"stateOrProvince\": \"CA\",\n    \"postalCode\": \"90210\",\n    \"country\": \"USA\"\n}"
+				},
+				{
+					"name": "Create Account Holder",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"mike\",\r\n    \"password\": \"123456\",\r\n    \"firstName\": \"Mike\",\r\n    \"lastName\": \"Wazowski\",\r\n    \"personalId\": \"198798678Q\",\r\n    \"dateOfBirth\": \"2002-01-20\",\r\n    \"street\": \"No name st.\",\r\n    \"doorNumber\": \"2\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"San Diego\",\r\n    \"stateOrProvince\": \"CA\",\r\n    \"postalCode\": \"90210\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/account-holder",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account-holder"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"username\": \"mike\",\r\n    \"firstName\": \"Mike\",\r\n    \"lastName\": \"Wazowski\",\r\n    \"dateOfBirth\": \"2002-01-20\",\r\n    \"street\": \"No name st.\",\r\n    \"doorNumber\": \"2\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"San Diego\",\r\n    \"stateOrProvince\": \"CA\",\r\n    \"postalCode\": \"90210\",\r\n    \"country\": \"USA\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Checking Account",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"accountHolderId\": 4,\r\n   \"secondaryAccountHolderId\": null,\r\n   \"balanceCurrency\": \"USD\",\r\n   \"balanceAmount\": 333,\r\n   \"secretKey\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/checking-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"checking-account"
+					]
+				},
+				"description": "Creates a ``CheckingAccount`` unless the ``AccountHolder`` age is below 24 years old. In that case, a ``StudentCheckingAccount`` is created. Must be an Admin for this request"
+			},
+			"response": [
+				{
+					"name": "Create Checking Account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"accountHolderId\": 4,\r\n   \"secondaryAccountHolderId\": null,\r\n   \"balanceCurrency\": \"USD\",\r\n   \"balanceAmount\": 333,\r\n   \"secretKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/checking-account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"checking-account"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 20:29:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"type\": \"StudentCheckingAccount\",\n    \"id\": 10,\n    \"startDate\": \"2021-02-12\",\n    \"primaryOwner\": {\n        \"id\": 4,\n        \"username\": \"mike\",\n        \"password\": \"$2a$10$1HxssVpJfZYm/lQDPEqT.Ojv0Sd3ARgFcAYARFPK1/eWbO.cc9RgC\",\n        \"firstName\": \"Mike\",\n        \"lastName\": \"Wazowski\",\n        \"personalId\": \"198798678Q\",\n        \"dateOfBirth\": \"2002-01-20\",\n        \"primaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        },\n        \"secondaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        }\n    },\n    \"secondaryOwner\": null,\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 333\n    },\n    \"minimumBalance\": null,\n    \"monthlyMaintenanceFee\": null,\n    \"penaltyFee\": 40,\n    \"status\": \"ACTIVE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Credit Card Account",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountHolderId\": 4,\r\n    \"secondaryAccountHolderId\": null,\r\n    \"balanceCurrency\": \"USD\",\r\n    \"balanceAmount\": 2000,\r\n    \"secretKey\": \"123456\",\r\n    \"creditLimit\": 2500,\r\n    \"interestRate\": 0.19\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/credit-card-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"credit-card-account"
+					]
+				},
+				"description": "A ``CreditCardAccount`` is created. Must be an Admin for this request."
+			},
+			"response": [
+				{
+					"name": "Create Credit Card Account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountHolderId\": 4,\r\n    \"secondaryAccountHolderId\": null,\r\n    \"balanceCurrency\": \"USD\",\r\n    \"balanceAmount\": 2000,\r\n    \"secretKey\": \"123456\",\r\n    \"creditLimit\": 2500,\r\n    \"interestRate\": 0.19\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/credit-card-account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"credit-card-account"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 19:50:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 6,\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 2000\n    },\n    \"primaryOwner\": {\n        \"id\": 4,\n        \"username\": \"mike\",\n        \"password\": \"$2a$10$1HxssVpJfZYm/lQDPEqT.Ojv0Sd3ARgFcAYARFPK1/eWbO.cc9RgC\",\n        \"firstName\": \"Mike\",\n        \"lastName\": \"Wazowski\",\n        \"personalId\": \"198798678Q\",\n        \"dateOfBirth\": \"2002-01-20\",\n        \"primaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        },\n        \"secondaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        }\n    },\n    \"secondaryOwner\": null,\n    \"status\": \"ACTIVE\",\n    \"creditLimit\": 2500,\n    \"interestRate\": 0.19,\n    \"penaltyFee\": 40\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Savings Account",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{      \r\n    \"accountHolderId\": 2,\r\n    \"secondaryAccountHolderId\": 4,\r\n    \"balanceCurrency\": \"USD\",\r\n    \"balanceAmount\": 5000,\r\n    \"minimumBalance\": 120,\r\n    \"secretKey\": \"123456\",\r\n    \"interestRate\": 0.42 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/savings-account",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"savings-account"
+					]
+				},
+				"description": "A ``SavingsAccount`` is created. Must be an Admin for this request."
+			},
+			"response": [
+				{
+					"name": "Create Savings Account",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{      \r\n    \"accountHolderId\": 2,\r\n    \"secondaryAccountHolderId\": 4,\r\n    \"balanceCurrency\": \"USD\",\r\n    \"balanceAmount\": 5000,\r\n    \"minimumBalance\": 120,\r\n    \"secretKey\": \"123456\",\r\n    \"interestRate\": 0.42 \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/savings-account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"savings-account"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 19:51:29 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 9,\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 5000\n    },\n    \"primaryOwner\": {\n        \"id\": 2,\n        \"username\": \"forrest2\",\n        \"password\": \"$2a$10$RsOpC8xSuoI5zjExva0uw.PQRcac3Ns.DtMW/Qcj1MZ6Ge4fE4F7i\",\n        \"firstName\": \"Forrest\",\n        \"lastName\": \"Gump\",\n        \"personalId\": \"12312312Y\",\n        \"dateOfBirth\": \"1966-10-15\",\n        \"primaryAddress\": {\n            \"street\": \"Alabama st.\",\n            \"doorNumber\": \"23\",\n            \"aptNumber\": \"\",\n            \"extraInfo\": \"\",\n            \"city\": \"\",\n            \"stateOrProvince\": \"\",\n            \"postalCode\": \"45120\",\n            \"country\": \"USA\"\n        },\n        \"secondaryAddress\": {\n            \"street\": \"Alabama st.\",\n            \"doorNumber\": \"23\",\n            \"aptNumber\": \"\",\n            \"extraInfo\": \"\",\n            \"city\": \"\",\n            \"stateOrProvince\": \"\",\n            \"postalCode\": \"45120\",\n            \"country\": \"USA\"\n        }\n    },\n    \"secondaryOwner\": {\n        \"id\": 4,\n        \"username\": \"mike\",\n        \"password\": \"$2a$10$1HxssVpJfZYm/lQDPEqT.Ojv0Sd3ARgFcAYARFPK1/eWbO.cc9RgC\",\n        \"firstName\": \"Mike\",\n        \"lastName\": \"Wazowski\",\n        \"personalId\": \"198798678Q\",\n        \"dateOfBirth\": \"2002-01-20\",\n        \"primaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        },\n        \"secondaryAddress\": {\n            \"street\": \"No name st.\",\n            \"doorNumber\": \"2\",\n            \"aptNumber\": \"3\",\n            \"extraInfo\": \"\",\n            \"city\": \"San Diego\",\n            \"stateOrProvince\": \"CA\",\n            \"postalCode\": \"90210\",\n            \"country\": \"USA\"\n        }\n    },\n    \"status\": \"ACTIVE\",\n    \"minimumBalance\": {\n        \"currency\": \"USD\",\n        \"amount\": 120\n    },\n    \"penaltyFee\": 40,\n    \"interestRate\": 0.42\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Third Party",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Chief Wiggum\",\r\n    \"hashedKey\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/third-party",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"third-party"
+					]
+				},
+				"description": "A ``ThirdParty`` is created. Must be an admin for this request."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Chief Wiggum\",\r\n    \"hashedKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/third-party",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"third-party"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 10:12:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"name\": \"Chief Wiggum\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Account Holder ID by Username",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "mike",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/account-holder/mike",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account-holder",
+						"mike"
+					]
+				},
+				"description": "Gets the ``AccountHolder`` ``Id`` to use in other requests. Must be an admin for this request."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/account-holder/mike",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account-holder",
+								"mike"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=757D99C6155842373B6594CB8D204284; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "22"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 15:49:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\"accountHolderId\": 2}"
+				}
+			]
+		},
+		{
+			"name": "Get Account Basics by ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/account/3/basic-details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account",
+						"3",
+						"basic-details"
+					]
+				},
+				"description": "Gets all the information of a certain ``Account``, whether it's a ``CheckingAccount``, ``StudentCheckingAccount``, ``SavingsAccount`` or ``CreditCardAccount``.\nLogged users (``AccountHolder``) can access only to their own accounts. Admin can access to every account."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/account/3/basic-details",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account",
+								"3",
+								"basic-details"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 20:11:41 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"type\": \"StudentCheckingAccount\",\n    \"primaryOwnerName\": \"mike\",\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 1500\n    },\n    \"status\": \"ACTIVE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Checking Accounts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/checking-accounts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"checking-accounts"
+					]
+				},
+				"description": "Gets a list of all the ``CheckingAccount``. Must be an admin for this request."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/checking-accounts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"checking-accounts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 20:28:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 555\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 250\n        },\n        \"penaltyFee\": 40,\n        \"monthlyMaintenanceFee\": 12\n    },\n    {\n        \"id\": 2,\n        \"startDate\": \"2021-02-12\",\n        \"secretKey\": {\n            \"algorithm\": \"AES\",\n            \"encoded\": \"MTIzNDU2\",\n            \"format\": \"RAW\",\n            \"destroyed\": false\n        },\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 800\n        },\n        \"status\": \"ACTIVE\",\n        \"minimumBalance\": {\n            \"currency\": \"USD\",\n            \"amount\": 250\n        },\n        \"penaltyFee\": 40,\n        \"monthlyMaintenanceFee\": 12\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Get Third Party",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null,
+				"description": "Gets a list of ``ThirdParty``. Must be an admin for this request."
+			},
+			"response": [
+				{
+					"name": "Get Third Party",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "[User] Get Accounts",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "mike",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/accounts/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"accounts",
+						"balance"
+					]
+				},
+				"description": "Gets the Balance of all the ``Account`` the user has. Ownership is consider both as a ``PrimaryOwner`` or a ``SecondaryOwner``."
+			},
+			"response": [
+				{
+					"name": "[User] Get Account",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/accounts/balance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"accounts",
+								"balance"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=D30200C7400212A08F0BD74261EACA5E; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 15:04:58 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 2,\n        \"type\": \"StudentCheckingAccount\",\n        \"primaryOwnerName\": \"mike\",\n        \"startDate\": \"2021-02-12\",\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 500\n        },\n        \"status\": \"ACTIVE\"\n    },\n    {\n        \"id\": 4,\n        \"type\": \"CreditCardAccount\",\n        \"primaryOwnerName\": \"peter\",\n        \"startDate\": \"2021-02-12\",\n        \"balance\": {\n            \"currency\": \"USD\",\n            \"amount\": 666\n        },\n        \"status\": \"ACTIVE\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "[User] Get Account by ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "mike",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/account/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account",
+						"5"
+					]
+				},
+				"description": "Gets the Balance of a certain ``Account`` identified by its ``Id``. Users can only access to their own accounts' information (whether being a ``PrimaryOwner`` or a ``SecondaryOwner``)."
+			},
+			"response": [
+				{
+					"name": "[User] Get Account by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/account/5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account",
+								"5"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 15:36:01 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 5,\n    \"type\": \"SavingsAccount\",\n    \"primaryOwnerName\": \"mike\",\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"EUR\",\n        \"amount\": 500\n    },\n    \"status\": \"ACTIVE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Transfer b. Account Holders",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "mike",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"destinationAccountId\": 1,\r\n    \"accountOwnerPersonalID\": \"12312312Y\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/transaction/transfer-from-account/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transaction",
+						"transfer-from-account",
+						"3"
+					]
+				},
+				"description": "Performs the transaction (transfer funds) from the indicated ``Account`` (indicated in the URL) to the ``Account`` indicated in the Body. User logged in must be the owner of the origin ``Account`` set in the URL.\n\n*Important*\n- Transactions performed on the same ``Account`` (origin account) in a period of 1 second or less will provoque the ``Account`` to be frozen due to anti-fraud policies.\n- Transactions made in 24 hours that total to more than 150% of the customers highest daily total transactions in any other 24 hour period will provoque the freezing of the origin ``Account``."
+			},
+			"response": [
+				{
+					"name": "Transfer b. Account Holders",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"destinationAccountId\": 1,\r\n    \"accountOwnerPersonalID\": \"12312312Y\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/transaction/transfer-from-account/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transaction",
+								"transfer-from-account",
+								"3"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=4EDDA333D539C0DF5CDCC31BF9E176B7; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 12 Feb 2021 20:44:44 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 2,\n    \"timeStamp\": \"2021-02-12T21:44:44.80943\",\n    \"type\": \"transfer\",\n    \"comments\": \"transfer between account holders\",\n    \"funds\": {\n        \"currency\": \"USD\",\n        \"amount\": 100\n    },\n    \"originAccountHolder\": {\n        \"username\": \"mike\",\n        \"firstName\": \"Mike\",\n        \"lastName\": \"Wazowski\",\n        \"dateOfBirth\": \"2002-01-20\",\n        \"street\": \"No name st.\",\n        \"doorNumber\": \"2\",\n        \"aptNumber\": \"3\",\n        \"extraInfo\": \"\",\n        \"city\": \"San Diego\",\n        \"stateOrProvince\": \"CA\",\n        \"postalCode\": \"90210\",\n        \"country\": \"USA\"\n    },\n    \"originAccountId\": 3,\n    \"originAccountType\": \"StudentCheckingAccount\",\n    \"destinationAccountHolder\": {\n        \"username\": \"forrest2\",\n        \"firstName\": \"Forrest\",\n        \"lastName\": \"Gump\",\n        \"dateOfBirth\": \"1966-10-15\",\n        \"street\": \"Alabama st.\",\n        \"doorNumber\": \"23\",\n        \"aptNumber\": \"\",\n        \"extraInfo\": \"\",\n        \"city\": \"\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"45120\",\n        \"country\": \"USA\"\n    },\n    \"destinationAccountId\": 1,\n    \"destinationAccountType\": \"CheckingAccount\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Collect from Third Party",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Third-Party-Key",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100,\r\n    \"accountId\": 1,\r\n    \"secretKey\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/transaction/collect",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transaction",
+						"collect"
+					]
+				},
+				"description": "Gets funds from a certain ``Account`` as a charge from a ``ThirdParty``. ``HashedKey`` from the ``ThirdParty`` must be included in the HTTP request's Header. \n\n*Important*\n- Collections performed on the same ``Account`` (origin account) in a period of 1 second or less will provoque the ``Account`` to be frozen due to anti-fraud policies.\n- Collections made in 24 hours that total to more than 150% of the customers highest daily total transactions in any other 24 hour period will provoque the freezing of the origin ``Account``."
+			},
+			"response": [
+				{
+					"name": "Collect from Third Party",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Third-Party-Key",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100,\r\n    \"accountId\": 1,\r\n    \"secretKey\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/transaction/collect",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transaction",
+								"collect"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 11:30:23 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 4,\n    \"timeStamp\": \"2021-02-13T12:30:22.795253\",\n    \"type\": \"Collection\",\n    \"comments\": \"Collection made by a Third Party\",\n    \"funds\": {\n        \"currency\": \"USD\",\n        \"amount\": 100\n    },\n    \"accountId\": 1,\n    \"accountType\": \"CheckingAccount\",\n    \"collectingEntity\": {\n        \"id\": 1,\n        \"name\": \"Milhouse Van Houten\"\n    },\n    \"accountHolder\": {\n        \"username\": \"forrest2\",\n        \"firstName\": \"Forrest\",\n        \"lastName\": \"Gump\",\n        \"dateOfBirth\": \"1966-10-15\",\n        \"street\": \"Alabama st.\",\n        \"doorNumber\": \"23\",\n        \"aptNumber\": \"\",\n        \"extraInfo\": \"\",\n        \"city\": \"\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"45120\",\n        \"country\": \"USA\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Deposit from Third Party",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Third-Party-Key",
+						"value": "123456",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100,\r\n    \"accountId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/transaction/deposit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transaction",
+						"deposit"
+					]
+				},
+				"description": "Deposit funds from a ``ThirdParty`` in a certain ``Account``."
+			},
+			"response": [
+				{
+					"name": "Deposito Third Party",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Third-Party-Key",
+								"value": "123456",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currency\": \"USD\",\r\n    \"amount\": 100,\r\n    \"accountId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/transaction/deposit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transaction",
+								"deposit"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 10:17:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 3,\n    \"timeStamp\": \"2021-02-13T11:17:36.4304398\",\n    \"type\": \"Deposit\",\n    \"comments\": \"Deposit made by a Third Party\",\n    \"funds\": {\n        \"currency\": \"USD\",\n        \"amount\": 100\n    },\n    \"beneficiaryAccountHolder\": {\n        \"username\": \"forrest2\",\n        \"firstName\": \"Forrest\",\n        \"lastName\": \"Gump\",\n        \"dateOfBirth\": \"1966-10-15\",\n        \"street\": \"Alabama st.\",\n        \"doorNumber\": \"23\",\n        \"aptNumber\": \"\",\n        \"extraInfo\": \"\",\n        \"city\": \"\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"45120\",\n        \"country\": \"USA\"\n    },\n    \"accountId\": 1,\n    \"accountType\": \"CheckingAccount\",\n    \"fundsOrigin\": {\n        \"id\": 1,\n        \"name\": \"Milhouse Van Houten\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions by Destination Account",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "forrest2",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/transactions/destination-account/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transactions",
+						"destination-account",
+						"1"
+					]
+				},
+				"description": "Gets all the ``Transaction`` where the indicated ``Account`` is the beneficiary, including all the possible origin ``Account``.\nUsers (``AccountHolder``) can only access to the information of their own accounts, in this case owning the beneficiary ``Account``. \nAdmins can access to any ``Account`` information."
+			},
+			"response": [
+				{
+					"name": "Get Transactions by Destination Account",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/transactions/destination-account/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transactions",
+								"destination-account",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=00DE38382E721993A046A3ADF2A3F06E; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 14:06:25 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"transfer\": [\n        {\n            \"id\": 1,\n            \"timeStamp\": \"2021-02-12T21:31:36.189219\",\n            \"type\": \"transfer\",\n            \"comments\": \"transfer between account holders\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"originAccountHolder\": {\n                \"username\": \"mike\",\n                \"firstName\": \"Mike\",\n                \"lastName\": \"Wazowski\",\n                \"dateOfBirth\": \"2002-01-20\",\n                \"street\": \"No name st.\",\n                \"doorNumber\": \"2\",\n                \"aptNumber\": \"3\",\n                \"extraInfo\": \"\",\n                \"city\": \"San Diego\",\n                \"stateOrProvince\": \"CA\",\n                \"postalCode\": \"90210\",\n                \"country\": \"USA\"\n            },\n            \"originAccountId\": 3,\n            \"originAccountType\": \"StudentCheckingAccount\",\n            \"destinationAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"destinationAccountId\": 1,\n            \"destinationAccountType\": \"CheckingAccount\"\n        },\n        {\n            \"id\": 2,\n            \"timeStamp\": \"2021-02-12T21:44:44.80943\",\n            \"type\": \"transfer\",\n            \"comments\": \"transfer between account holders\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"originAccountHolder\": {\n                \"username\": \"mike\",\n                \"firstName\": \"Mike\",\n                \"lastName\": \"Wazowski\",\n                \"dateOfBirth\": \"2002-01-20\",\n                \"street\": \"No name st.\",\n                \"doorNumber\": \"2\",\n                \"aptNumber\": \"3\",\n                \"extraInfo\": \"\",\n                \"city\": \"San Diego\",\n                \"stateOrProvince\": \"CA\",\n                \"postalCode\": \"90210\",\n                \"country\": \"USA\"\n            },\n            \"originAccountId\": 3,\n            \"originAccountType\": \"StudentCheckingAccount\",\n            \"destinationAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"destinationAccountId\": 1,\n            \"destinationAccountType\": \"CheckingAccount\"\n        }\n    ],\n    \"deposit\": [\n        {\n            \"id\": 3,\n            \"timeStamp\": \"2021-02-13T11:17:36.43044\",\n            \"type\": \"Deposit\",\n            \"comments\": \"Deposit made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"beneficiaryAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"fundsOrigin\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            }\n        }\n    ],\n    \"collection\": []\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions by Origin Account",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "forrest2",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/transactions/origin-account/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transactions",
+						"origin-account",
+						"1"
+					]
+				},
+				"description": "Gets all the ``Transaction`` where the indicated ``Account`` is the origin of the funds, including all the possible destination ``Account``.\nUsers (``AccountHolder``) can only access to the information of their own accounts, in this case owning the origin ``Account``. \nAdmins can access to any ``Account`` information."
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/transactions/origin-account/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transactions",
+								"origin-account",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=65803278926788B5B4CC86898918206B; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 14:30:51 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"transfer\": [],\n    \"deposit\": [],\n    \"collection\": [\n        {\n            \"id\": 4,\n            \"timeStamp\": \"2021-02-13T12:30:22.795253\",\n            \"type\": \"Collection\",\n            \"comments\": \"Collection made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"collectingEntity\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            },\n            \"accountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions by Account Holder ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "forrest2",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/transactions/account-holder/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transactions",
+						"account-holder",
+						"2"
+					]
+				},
+				"description": "Gets all the ``Transaction`` involving the ``AccountHolder``. The user logged in must be the ``AccountHolder`` to access the information.\nAdmins can access to any ``AccountHolder`` information"
+			},
+			"response": [
+				{
+					"name": "Get Transactions by Account Holder ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/transactions/account-holder/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transactions",
+								"account-holder",
+								"2"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:11:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"transfer\": [\n        {\n            \"id\": 1,\n            \"timeStamp\": \"2021-02-12T21:31:36.189219\",\n            \"type\": \"transfer\",\n            \"comments\": \"transfer between account holders\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"originAccountHolder\": {\n                \"username\": \"mike\",\n                \"firstName\": \"Mike\",\n                \"lastName\": \"Wazowski\",\n                \"dateOfBirth\": \"2002-01-20\",\n                \"street\": \"No name st.\",\n                \"doorNumber\": \"2\",\n                \"aptNumber\": \"3\",\n                \"extraInfo\": \"\",\n                \"city\": \"San Diego\",\n                \"stateOrProvince\": \"CA\",\n                \"postalCode\": \"90210\",\n                \"country\": \"USA\"\n            },\n            \"originAccountId\": 3,\n            \"originAccountType\": \"StudentCheckingAccount\",\n            \"destinationAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"destinationAccountId\": 1,\n            \"destinationAccountType\": \"CheckingAccount\"\n        },\n        {\n            \"id\": 2,\n            \"timeStamp\": \"2021-02-12T21:44:44.80943\",\n            \"type\": \"transfer\",\n            \"comments\": \"transfer between account holders\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"originAccountHolder\": {\n                \"username\": \"mike\",\n                \"firstName\": \"Mike\",\n                \"lastName\": \"Wazowski\",\n                \"dateOfBirth\": \"2002-01-20\",\n                \"street\": \"No name st.\",\n                \"doorNumber\": \"2\",\n                \"aptNumber\": \"3\",\n                \"extraInfo\": \"\",\n                \"city\": \"San Diego\",\n                \"stateOrProvince\": \"CA\",\n                \"postalCode\": \"90210\",\n                \"country\": \"USA\"\n            },\n            \"originAccountId\": 3,\n            \"originAccountType\": \"StudentCheckingAccount\",\n            \"destinationAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"destinationAccountId\": 1,\n            \"destinationAccountType\": \"CheckingAccount\"\n        }\n    ],\n    \"deposit\": [\n        {\n            \"id\": 3,\n            \"timeStamp\": \"2021-02-13T11:17:36.43044\",\n            \"type\": \"Deposit\",\n            \"comments\": \"Deposit made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"beneficiaryAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"fundsOrigin\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            }\n        }\n    ],\n    \"collection\": [\n        {\n            \"id\": 4,\n            \"timeStamp\": \"2021-02-13T12:30:22.795253\",\n            \"type\": \"Collection\",\n            \"comments\": \"Collection made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"collectingEntity\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            },\n            \"accountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Transactions by Third Party ID",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/transactions/third-party/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"transactions",
+						"third-party",
+						"1"
+					]
+				},
+				"description": "Gets all the ``Transaction`` made by a certain ``ThirdParty`` identified by its ``Id``. Must be an admin for this request."
+			},
+			"response": [
+				{
+					"name": "Get Transactions by Third Party ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/transactions/third-party/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"transactions",
+								"third-party",
+								"1"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:26:09 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"deposit\": [\n        {\n            \"id\": 3,\n            \"timeStamp\": \"2021-02-13T11:17:36.43044\",\n            \"type\": \"Deposit\",\n            \"comments\": \"Deposit made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"beneficiaryAccountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"fundsOrigin\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            }\n        }\n    ],\n    \"collection\": [\n        {\n            \"id\": 4,\n            \"timeStamp\": \"2021-02-13T12:30:22.795253\",\n            \"type\": \"Collection\",\n            \"comments\": \"Collection made by a Third Party\",\n            \"funds\": {\n                \"currency\": \"USD\",\n                \"amount\": 100\n            },\n            \"accountId\": 1,\n            \"accountType\": \"CheckingAccount\",\n            \"collectingEntity\": {\n                \"id\": 1,\n                \"name\": \"Milhouse Van Houten\"\n            },\n            \"accountHolder\": {\n                \"username\": \"forrest2\",\n                \"firstName\": \"Forrest\",\n                \"lastName\": \"Gump\",\n                \"dateOfBirth\": \"1966-10-15\",\n                \"street\": \"Alabama st.\",\n                \"doorNumber\": \"23\",\n                \"aptNumber\": \"\",\n                \"extraInfo\": \"\",\n                \"city\": \"\",\n                \"stateOrProvince\": \"\",\n                \"postalCode\": \"45120\",\n                \"country\": \"USA\"\n            }\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Account Status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/account/1/status?change-to=frozen",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account",
+						"1",
+						"status"
+					],
+					"query": [
+						{
+							"key": "change-to",
+							"value": "frozen"
+						}
+					]
+				},
+				"description": "Changes the ``Status`` of a certain ``Account`` identified by its ``Id``. Only two possible options in the *change-to* URL parameter: \"active\" or \"frozen\". Must be an admin for this request.  "
+			},
+			"response": [
+				{
+					"name": "Change Account Status",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/account/1/status?change-to=frozen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account",
+								"1",
+								"status"
+							],
+							"query": [
+								{
+									"key": "change-to",
+									"value": "frozen"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=CF298FB67BEEB6F17ACD333771C242E1; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:35:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"type\": \"CheckingAccount\",\n    \"primaryOwnerName\": \"forrest2\",\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 555\n    },\n    \"status\": \"FROZEN\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Account Balance",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8088/account/1/balance?amount=555",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account",
+						"1",
+						"balance"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "555"
+						}
+					]
+				},
+				"description": "Changes the ``Balance`` of a certain ``Account`` identified by its ``Id``. Must be an admin for this request"
+			},
+			"response": [
+				{
+					"name": "Change Status",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8088/account/1/balance?amount=555",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account",
+								"1",
+								"balance"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "555"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:30:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1,\n    \"type\": \"CheckingAccount\",\n    \"primaryOwnerName\": \"forrest2\",\n    \"startDate\": \"2021-02-12\",\n    \"balance\": {\n        \"currency\": \"USD\",\n        \"amount\": 555\n    },\n    \"status\": \"ACTIVE\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Change Primary Address",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"street\": \"My new St.\",\r\n    \"doorNumber\": \"123\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"Salsipuedes\",\r\n    \"stateOrProvince\": \"\",\r\n    \"postalCode\": \"PQR11412\",\r\n    \"country\": \"Lost Country\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/account-holder/2/primary-address",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account-holder",
+						"2",
+						"primary-address"
+					]
+				},
+				"description": "Changes the ``PrimaryAddress`` of a certain ``AccountHolder`` identified by its ``Id``. The logged in user must be the ``AccountHolder``."
+			},
+			"response": [
+				{
+					"name": "Change Primary Address",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"My new St.\",\r\n    \"doorNumber\": \"123\",\r\n    \"aptNumber\": \"3\",\r\n    \"extraInfo\": \"\",\r\n    \"city\": \"Salsipuedes\",\r\n    \"stateOrProvince\": \"\",\r\n    \"postalCode\": \"PQR11412\",\r\n    \"country\": \"Lost Country\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/account-holder/2/primary-address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account-holder",
+								"2",
+								"primary-address"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Set-Cookie",
+							"value": "JSESSIONID=CF4308B504D84E017E570C32F3D38EB6; Path=/; HttpOnly"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:53:26 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"street\": \"My new St.\",\n        \"doorNumber\": \"123\",\n        \"aptNumber\": \"3\",\n        \"extraInfo\": \"\",\n        \"city\": \"Salsipuedes\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"PQR11412\",\n        \"country\": \"Lost Country\"\n    },\n    {\n        \"street\": \"Alabama st.\",\n        \"doorNumber\": \"23\",\n        \"aptNumber\": \"\",\n        \"extraInfo\": \"\",\n        \"city\": \"\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"45120\",\n        \"country\": \"USA\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Change Secondary Address",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"street\": \"Paralell Universe St.\",\r\n    \"doorNumber\": \"666\",\r\n    \"aptNumber\": \"9 y 3/4\",\r\n    \"extraInfo\": \"Never\",\r\n    \"city\": \"Crap Hole City\",\r\n    \"stateOrProvince\": \"\",\r\n    \"postalCode\": \"RQF654323\",\r\n    \"country\": \"Gilead\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8088/account-holder/2/secondary-address",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"account-holder",
+						"2",
+						"secondary-address"
+					]
+				},
+				"description": "Changes the ``SecondaryAddress`` of a certain ``AccountHolder`` identified by its ``Id``. The logged in user must be the ``AccountHolder``."
+			},
+			"response": [
+				{
+					"name": "Change Secondary Address",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"street\": \"Paralell Universe St.\",\r\n    \"doorNumber\": \"666\",\r\n    \"aptNumber\": \"9 y 3/4\",\r\n    \"extraInfo\": \"Never\",\r\n    \"city\": \"Crap Hole City\",\r\n    \"stateOrProvince\": \"\",\r\n    \"postalCode\": \"RQF654323\",\r\n    \"country\": \"Gilead\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8088/account-holder/2/secondary-address",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8088",
+							"path": [
+								"account-holder",
+								"2",
+								"secondary-address"
+							]
+						}
+					},
+					"status": "Accepted",
+					"code": 202,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 13 Feb 2021 15:53:45 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"street\": \"My new St.\",\n        \"doorNumber\": \"123\",\n        \"aptNumber\": \"3\",\n        \"extraInfo\": \"\",\n        \"city\": \"Salsipuedes\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"PQR11412\",\n        \"country\": \"Lost Country\"\n    },\n    {\n        \"street\": \"Paralell Universe St.\",\n        \"doorNumber\": \"666\",\n        \"aptNumber\": \"9 y 3/4\",\n        \"extraInfo\": \"Never\",\n        \"city\": \"Crap Hole City\",\n        \"stateOrProvince\": \"\",\n        \"postalCode\": \"RQF654323\",\n        \"country\": \"Gilead\"\n    }\n]"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
